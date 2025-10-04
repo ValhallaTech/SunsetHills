@@ -15,12 +15,8 @@
   [build.environment]
     NODE_VERSION = "22.20.0"
 
-# Redirect rules for SPA behavior
-# Routes all URLs to index.html for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# NO REDIRECTS NEEDED - This is a Multi-Page App (MPA), not an SPA
+# Each HTML file should be served as-is
 
 # Headers for security and performance
 [[headers]]
