@@ -105,6 +105,18 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="package.json" />
+    <Content Include=".yarnrc.yml" />
+    <Content Include=".eslintrc.json" />
+    <Content Include=".prettierrc" />
+    <Content Include="netlify.toml" />
+    <Content Include=".nvmrc" />
+    <Content Include="DEPLOYMENT.md" />
+    <Content Include="pre-deploy.sh" />
+    <Content Include="pre-deploy.ps1" />
+    <Content Include="CHARTJS-PRISM-FIX.md" />
+    <Content Include="deploy-fix.ps1" />
+    <Content Include="FINAL-FIX-DYNAMIC-IMPORTS.md" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\JavaScript.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
@@ -183,6 +195,23 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Solve.html" />
+    <Content Include="src\code-examples\java.java" />
+    <Content Include="src\code-examples\javascript.js" />
+    <Content Include="src\code.html" />
+    <Content Include="src\index.html" />
+    <Content Include="src\js\chartSetup.js" />
+    <Content Include="src\js\code.js" />
+    <Content Include="src\js\codeDisplay.js" />
+    <Content Include="src\js\main.js" />
+    <Content Include="src\js\presets.js" />
+    <Content Include="src\js\resultsDisplay.js" />
+    <Content Include="src\js\solve.js" />
+    <Content Include="src\js\statistics.js" />
+    <Content Include="src\js\sunsetHills.js" />
+    <Content Include="src\js\themeToggle.js" />
+    <Content Include="src\js\toast.js" />
+    <Content Include="src\solve.html" />
+    <Content Include="src\styles\custom.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -197,11 +226,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\code-examples\csharp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
+    <Content Include="src\code-examples\python.py" />
+    <Content Include="URGENT-FIX.md" />
+    <Content Include="SEPARATE-ENTRY-POINTS.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
