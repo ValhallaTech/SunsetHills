@@ -3,13 +3,15 @@
 // ============================================
 
 import { Chart, registerables } from 'chart.js';
-import { dragData } from 'chartjs-plugin-dragdata';
 import { solveSunsetHills } from './sunsetHills.js';
 import { updateResults } from './resultsDisplay.js';
 import { calculateStatistics, updateStatisticsDisplay } from './statistics.js';
 
-// Register Chart.js components and drag plugin
-Chart.register(...registerables, dragData);
+// Register Chart.js components
+Chart.register(...registerables);
+
+// NOTE: Drag plugin temporarily disabled due to compatibility issues
+// Will be re-enabled once resolved
 
 // Default building heights
 const DEFAULT_HEIGHTS = [71, 55, 50, 65, 95, 68, 28, 34, 14];
@@ -21,7 +23,7 @@ let currentHeights = [...DEFAULT_HEIGHTS];
 let chart = null;
 
 /**
- * Initializes the Chart.js bar chart with drag-and-drop functionality
+ * Initializes the Chart.js bar chart
  */
 export function initChart() {
   const canvas = document.getElementById('buildingsChart');
@@ -46,20 +48,20 @@ export function initChart() {
           data: currentHeights,
           backgroundColor: currentHeights.map((_, index) =>
             solutionIndices.includes(index)
-              ? 'rgba(255, 165, 0, 0.85)' // Sunset orange
-              : 'rgba(108, 117, 125, 0.75)' // Gray
+              ? 'rgba(255, 165, 0, 0.85)'
+              : 'rgba(108, 117, 125, 0.75)'
           ),
           borderColor: currentHeights.map((_, index) =>
             solutionIndices.includes(index)
-              ? 'rgba(255, 140, 0, 1)' // Dark orange
-              : 'rgba(90, 98, 104, 1)' // Dark gray
+              ? 'rgba(255, 140, 0, 1)'
+              : 'rgba(90, 98, 104, 1)'
           ),
           borderWidth: 2,
           borderRadius: 4,
           hoverBackgroundColor: currentHeights.map((_, index) =>
             solutionIndices.includes(index)
-              ? 'rgba(255, 165, 0, 1)' // Brighter on hover
-              : 'rgba(108, 117, 125, 0.9'
+              ? 'rgba(255, 165, 0, 1)'
+              : 'rgba(108, 117, 125, 0.9)'
           ),
         },
       ],
@@ -75,13 +77,13 @@ export function initChart() {
             generateLabels: function () {
               return [
                 {
-                  text: '?? Can See Sunset',
+                  text: 'Can See Sunset',
                   fillStyle: 'rgba(255, 165, 0, 0.85)',
                   strokeStyle: 'rgba(255, 140, 0, 1)',
                   lineWidth: 2,
                 },
                 {
-                  text: '? Cannot See Sunset',
+                  text: 'Cannot See Sunset',
                   fillStyle: 'rgba(108, 117, 125, 0.75)',
                   strokeStyle: 'rgba(90, 98, 104, 1)',
                   lineWidth: 2,
@@ -126,25 +128,9 @@ export function initChart() {
               const canSeeSunset = solutionIndices.includes(context.dataIndex);
               return [
                 `Height: ${context.parsed.y} units`,
-                canSeeSunset ? '?? Can see sunset!' : '? Cannot see sunset',
+                canSeeSunset ? 'Can see sunset!' : 'Cannot see sunset',
               ];
             },
-          },
-        },
-        dragData: {
-          round: 0,
-          showTooltip: true,
-          onDragStart: function (e, datasetIndex, index, value) {
-            return true;
-          },
-          onDrag: function (e, datasetIndex, index, value) {
-            if (value < 10) return false;
-            if (value > 100) return false;
-            return true;
-          },
-          onDragEnd: function (e, datasetIndex, index, value) {
-            currentHeights[index] = Math.round(value);
-            updateChart();
           },
         },
       },
@@ -178,7 +164,7 @@ export function initChart() {
           },
           title: {
             display: true,
-            text: 'Buildings (West ? Direction of Sunset)',
+            text: 'Buildings (Sunset to WEST/Left)',
             font: {
               size: 14,
               weight: 'bold',
@@ -222,6 +208,8 @@ export function initChart() {
   // Initial updates
   updateResults(currentHeights, solutionIndices);
   updateStatisticsDisplay(calculateStatistics(currentHeights, solutionIndices));
+  
+  console.log('Chart created successfully');
 }
 
 /**
@@ -248,7 +236,7 @@ function updateChart() {
   chart.data.datasets[0].hoverBackgroundColor = currentHeights.map((_, index) =>
     solutionIndices.includes(index)
       ? 'rgba(255, 165, 0, 1)'
-      : 'rgba(108, 117, 125, 0.9'
+      : 'rgba(108, 117, 125, 0.9)' // FIXED: Added closing paren
   );
 
   chart.update();

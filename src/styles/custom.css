@@ -233,14 +233,29 @@ h6 {
 .hero-section {
   background: linear-gradient(
     135deg,
-    var(--color-primary-light) 0%,
-    var(--color-secondary) 100%
+    rgba(255, 107, 53, 0.8) 0%,
+    rgba(255, 165, 0, 0.7) 50%,
+    rgba(255, 140, 0, 0.85) 100%
   );
   color: var(--color-white);
 }
 
 .hero-section h1 {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section .display-4 i {
+  display: inline-block;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: var(--transition-base);
+}
+
+.hero-section .display-4 i:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .feature-list {

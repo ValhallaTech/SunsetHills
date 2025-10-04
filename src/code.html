@@ -82,10 +82,10 @@
                                 Algorithm Approach
                             </h2>
                             <p>
-                                The most efficient solution uses a <strong>right-to-left scan</strong> with 
-                                a running maximum. As we iterate from right to left (east to west), we track 
-                                the tallest building seen so far. A building can see the sunset if it's taller 
-                                than all buildings to its right.
+                                The most efficient solution uses a <strong>left-to-right scan</strong> with 
+                                a running maximum. The sunset is to the <strong>WEST (left side)</strong> of the array. 
+                                As we iterate from left to right, we track the tallest building seen so far. 
+                                A building can see the sunset if it's taller than all buildings to its left.
                             </p>
                             
                             <h3 class="h5 mt-4 mb-3">
@@ -114,9 +114,9 @@
                                 Step-by-Step Process
                             </h3>
                             <ol class="mb-0">
-                                <li class="mb-2">Start from the <strong>rightmost building</strong> (it always sees the sunset)</li>
+                                <li class="mb-2">Start from the <strong>leftmost building</strong> (it always sees the sunset - nothing to its left)</li>
                                 <li class="mb-2">Track the <strong>maximum height</strong> encountered so far</li>
-                                <li class="mb-2">For each building moving left: if it's <strong>taller than the max</strong>, it can see the sunset</li>
+                                <li class="mb-2">For each building moving right: if it's <strong>taller than the max</strong>, it can see the sunset</li>
                                 <li class="mb-2">Update the maximum height after each comparison</li>
                                 <li class="mb-2">Return the indices of buildings with sunset view</li>
                             </ol>
@@ -177,65 +177,65 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>8</td>
-                                        <td>14</td>
                                         <td>0</td>
-                                        <td><span class="badge bg-success">Yes</span> (14 > 0)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>34</td>
-                                        <td>14</td>
-                                        <td><span class="badge bg-success">Yes</span> (34 > 14)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>28</td>
-                                        <td>34</td>
-                                        <td><span class="badge bg-danger">No</span> (28 ≤ 34)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>68</td>
-                                        <td>34</td>
-                                        <td><span class="badge bg-success">Yes</span> (68 > 34)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>95</td>
-                                        <td>68</td>
-                                        <td><span class="badge bg-success">Yes</span> (95 > 68)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>65</td>
-                                        <td>95</td>
-                                        <td><span class="badge bg-danger">No</span> (65 ≤ 95)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>50</td>
-                                        <td>95</td>
-                                        <td><span class="badge bg-danger">No</span> (50 ≤ 95)</td>
+                                        <td>71</td>
+                                        <td>0</td>
+                                        <td><span class="badge bg-success">Yes</span> (71 > 0, leftmost)</td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>55</td>
-                                        <td>95</td>
-                                        <td><span class="badge bg-danger">No</span> (55 ≤ 95)</td>
+                                        <td>71</td>
+                                        <td><span class="badge bg-danger">No</span> (55 ≤ 71)</td>
                                     </tr>
                                     <tr>
-                                        <td>0</td>
+                                        <td>2</td>
+                                        <td>50</td>
                                         <td>71</td>
+                                        <td><span class="badge bg-danger">No</span> (50 ≤ 71)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>65</td>
+                                        <td>71</td>
+                                        <td><span class="badge bg-danger">No</span> (65 ≤ 71)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
                                         <td>95</td>
-                                        <td><span class="badge bg-danger">No</span> (71 ≤ 95)</td>
+                                        <td>71</td>
+                                        <td><span class="badge bg-success">Yes</span> (95 > 71)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>68</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (68 ≤ 95)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>28</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (28 ≤ 95)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>34</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (34 ≤ 95)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>14</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (14 ≤ 95)</td>
                                     </tr>
                                 </tbody>
                             </table>
                             
                             <p class="mb-0">
-                                <strong>Output:</strong> <code>[0, 4, 5, 7, 8]</code> 
-                                <span class="text-muted">(Buildings 1, 5, 6, 8, and 9 can see the sunset)</span>
+                                <strong>Output:</strong> <code>[0, 4]</code> 
+                                <span class="text-muted">(Buildings 1 and 5 can see the sunset to the WEST)</span>
                             </p>
                         </div>
 

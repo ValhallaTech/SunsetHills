@@ -4,9 +4,10 @@
 
 /**
  * Determines which buildings can see the sunset.
- * A building can see the sunset if all buildings to its right are strictly shorter.
+ * A building can see the sunset (which is to the WEST/LEFT) if all buildings 
+ * to its left are strictly shorter.
  * 
- * Algorithm: Right-to-left scan with running maximum
+ * Algorithm: Left-to-right scan with running maximum
  * Time Complexity: O(n)
  * Space Complexity: O(1) excluding result array
  * 
@@ -21,10 +22,10 @@ export function solveSunsetHills(heights) {
   const result = [];
   let maxHeight = 0;
 
-  // Scan from right to left (east to west)
-  for (let i = heights.length - 1; i >= 0; i--) {
+  // Scan from left to right (buildings face west/left where sunset is)
+  for (let i = 0; i < heights.length; i++) {
     if (heights[i] > maxHeight) {
-      result.unshift(i); // Add to front of array to maintain left-to-right order
+      result.push(i);
       maxHeight = heights[i];
     }
   }

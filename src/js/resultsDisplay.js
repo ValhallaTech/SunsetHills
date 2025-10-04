@@ -60,7 +60,7 @@ export function updateResults(heights, solutionIndices) {
     </div>
     <div class="mt-3 small text-muted">
       <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
-      These buildings are taller than all buildings to their right.
+      These buildings are taller than all buildings to their left (west).
     </div>
   `;
 }

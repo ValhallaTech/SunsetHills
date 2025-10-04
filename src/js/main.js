@@ -1,7 +1,9 @@
 // ============================================
 // Sunset Hills - Main Entry Point
 // ============================================
-// Import Bootstrap (CSS and JS)
+
+// Import Bootstrap CSS AND JS
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 
 // Import Font Awesome
@@ -17,12 +19,16 @@ console.log(`Sunset Hills initialized on ${currentPage}`);
 
 // Initialize solver page
 if (currentPage === 'solve.html') {
+  console.log('Loading solver modules...');
+  
   // Dynamically import chart modules and other dependencies
   Promise.all([
     import('./chartSetup.js'),
     import('./presets.js'),
     import('./toast.js'),
   ]).then(([chartModule, presetsModule, toastModule]) => {
+    console.log('Modules loaded successfully');
+    
     const {
       initChart,
       resetBuildings,
@@ -36,16 +42,25 @@ if (currentPage === 'solve.html') {
     const { getPreset, getPresetOptionsHTML } = presetsModule;
     const { showSuccess, showError, showInfo } = toastModule;
 
+    console.log('Initializing chart...');
+    
     // Initialize the chart
-    initChart();
+    try {
+      initChart();
+      console.log('Chart initialized successfully');
+    } catch (error) {
+      console.error('Error initializing chart:', error);
+    }
 
     // Populate preset dropdown
     const presetSelect = document.getElementById('presetSelect');
     if (presetSelect) {
+      console.log('Populating preset dropdown...');
       presetSelect.innerHTML = `
         <option value="">-- Choose a Preset --</option>
         ${getPresetOptionsHTML()}
       `;
+      console.log('Preset dropdown populated');
 
       presetSelect.addEventListener('change', (e) => {
         const presetKey = e.target.value;
@@ -58,6 +73,8 @@ if (currentPage === 'solve.html') {
           }
         }
       });
+    } else {
+      console.error('Preset select element not found!');
     }
 
     // Reset button
@@ -73,6 +90,9 @@ if (currentPage === 'solve.html') {
           presetSelect.value = '';
         }
       });
+      console.log('Reset button wired up');
+    } else {
+      console.error('Reset button not found!');
     }
 
     // Randomize button
@@ -83,6 +103,9 @@ if (currentPage === 'solve.html') {
         showSuccess('Buildings randomized!');
         console.log('Buildings randomized');
       });
+      console.log('Randomize button wired up');
+    } else {
+      console.error('Randomize button not found!');
     }
 
     // Manual input
@@ -111,6 +134,7 @@ if (currentPage === 'solve.html') {
           applyManualBtn.click();
         }
       });
+      console.log('Manual input wired up');
     }
 
     // Add building button
@@ -124,6 +148,7 @@ if (currentPage === 'solve.html') {
           showError('Maximum 20 buildings reached.');
         }
       });
+      console.log('Add building button wired up');
     }
 
     // Remove building button
@@ -137,19 +162,30 @@ if (currentPage === 'solve.html') {
           showError('Must have at least 1 building.');
         }
       });
+      console.log('Remove building button wired up');
     }
 
-    console.log('Chart and all controls initialized successfully');
+    console.log('? Chart and all controls initialized successfully');
   }).catch((error) => {
-    console.error('Error initializing chart:', error);
+    console.error('? Error initializing chart modules:', error);
+    alert('Error loading chart. Please check the console for details.');
   });
 }
 
 // Initialize code display page
 if (currentPage === 'code.html') {
+  console.log('Loading code display modules...');
+  
   // Dynamically import code display module
   import('./codeDisplay.js').then(({ initCodeDisplay, copyCode }) => {
-    initCodeDisplay();
+    console.log('Code display module loaded');
+    
+    try {
+      initCodeDisplay();
+      console.log('Code display initialized');
+    } catch (error) {
+      console.error('Error initializing code display:', error);
+    }
 
     // Wire up copy button
     const copyBtn = document.getElementById('copyCodeBtn');
@@ -160,10 +196,11 @@ if (currentPage === 'code.html') {
         const language = activeTab ? activeTab.getAttribute('data-language') : 'javascript';
         copyCode(language);
       });
+      console.log('Copy button wired up');
     }
 
-    console.log('Code display initialized with Prism.js');
+    console.log('? Code display initialized successfully');
   }).catch((error) => {
-    console.error('Error initializing code display:', error);
+    console.error('? Error initializing code display:', error);
   });
 }

@@ -20,10 +20,13 @@ export const CODE_EXAMPLES = {
     icon: 'fa-brands fa-js',
     code: `/**
  * Determines which buildings can see the sunset.
+ * The sunset is to the WEST (left). Buildings face west.
+ * A building can see the sunset if all buildings to its LEFT are shorter.
+ * 
  * Time Complexity: O(n)
  * Space Complexity: O(1) excluding result array
  * 
- * @param {number[]} heights - Array of building heights
+ * @param {number[]} heights - Array of building heights (west to east)
  * @returns {number[]} - Indices of buildings with sunset view
  */
 function solveSunsetHills(heights) {
@@ -34,10 +37,10 @@ function solveSunsetHills(heights) {
   const result = [];
   let maxHeight = 0;
 
-  // Scan from right to left (east to west)
-  for (let i = heights.length - 1; i >= 0; i--) {
+  // Scan from left to right (west to east)
+  for (let i = 0; i < heights.length; i++) {
     if (heights[i] > maxHeight) {
-      result.unshift(i); // Add to front to maintain order
+      result.push(i);
       maxHeight = heights[i];
     }
   }
@@ -48,7 +51,7 @@ function solveSunsetHills(heights) {
 // Example usage
 const buildings = [71, 55, 50, 65, 95, 68, 28, 34, 14];
 const sunsetView = solveSunsetHills(buildings);
-console.log(sunsetView); // [0, 4, 5, 7, 8]`,
+console.log(sunsetView); // [0, 4] - Buildings 1 and 5`,
   },
 
   python: {
@@ -57,11 +60,14 @@ console.log(sunsetView); // [0, 4, 5, 7, 8]`,
     code: `def solve_sunset_hills(heights):
     """
     Determines which buildings can see the sunset.
+    The sunset is to the WEST (left). Buildings face west.
+    A building can see the sunset if all buildings to its LEFT are shorter.
+    
     Time Complexity: O(n)
     Space Complexity: O(1) excluding result list
     
     Args:
-        heights: List of building heights
+        heights: List of building heights (west to east)
     
     Returns:
         List of indices of buildings with sunset view
@@ -72,10 +78,10 @@ console.log(sunsetView); // [0, 4, 5, 7, 8]`,
     result = []
     max_height = 0
     
-    # Scan from right to left (east to west)
-    for i in range(len(heights) - 1, -1, -1):
+    # Scan from left to right (west to east)
+    for i in range(len(heights)):
         if heights[i] > max_height:
-            result.insert(0, i)  # Add to front to maintain order
+            result.append(i)
             max_height = heights[i]
     
     return result
@@ -84,7 +90,7 @@ console.log(sunsetView); // [0, 4, 5, 7, 8]`,
 # Example usage
 buildings = [71, 55, 50, 65, 95, 68, 28, 34, 14]
 sunset_view = solve_sunset_hills(buildings)
-print(sunset_view)  # [0, 4, 5, 7, 8]`,
+print(sunset_view)  # [0, 4] - Buildings 1 and 5`,
   },
 
   java: {
@@ -95,10 +101,13 @@ print(sunset_view)  # [0, 4, 5, 7, 8]`,
 public class SunsetHills {
     /**
      * Determines which buildings can see the sunset.
+     * The sunset is to the WEST (left). Buildings face west.
+     * A building can see the sunset if all buildings to its LEFT are shorter.
+     * 
      * Time Complexity: O(n)
      * Space Complexity: O(1) excluding result list
      * 
-     * @param heights Array of building heights
+     * @param heights Array of building heights (west to east)
      * @return List of indices of buildings with sunset view
      */
     public static List<Integer> solveSunsetHills(int[] heights) {
@@ -110,10 +119,10 @@ public class SunsetHills {
         
         int maxHeight = 0;
         
-        // Scan from right to left (east to west)
-        for (int i = heights.length - 1; i >= 0; i--) {
+        // Scan from left to right (west to east)
+        for (int i = 0; i < heights.length; i++) {
             if (heights[i] > maxHeight) {
-                result.add(0, i); // Add to front to maintain order
+                result.add(i);
                 maxHeight = heights[i];
             }
         }
@@ -124,7 +133,7 @@ public class SunsetHills {
     public static void main(String[] args) {
         int[] buildings = {71, 55, 50, 65, 95, 68, 28, 34, 14};
         List<Integer> sunsetView = solveSunsetHills(buildings);
-        System.out.println(sunsetView); // [0, 4, 5, 7, 8]
+        System.out.println(sunsetView); // [0, 4] - Buildings 1 and 5
     }
 }`,
   },
@@ -139,10 +148,13 @@ public class SunsetHills
 {
     /// <summary>
     /// Determines which buildings can see the sunset.
+    /// The sunset is to the WEST (left). Buildings face west.
+    /// A building can see the sunset if all buildings to its LEFT are shorter.
+    /// 
     /// Time Complexity: O(n)
     /// Space Complexity: O(1) excluding result list
     /// </summary>
-    /// <param name="heights">Array of building heights</param>
+    /// <param name="heights">Array of building heights (west to east)</param>
     /// <returns>List of indices of buildings with sunset view</returns>
     public static List<int> SolveSunsetHills(int[] heights)
     {
@@ -155,12 +167,12 @@ public class SunsetHills
         
         int maxHeight = 0;
         
-        // Scan from right to left (east to west)
-        for (int i = heights.Length - 1; i >= 0; i--)
+        // Scan from left to right (west to east)
+        for (int i = 0; i < heights.Length; i++)
         {
             if (heights[i] > maxHeight)
             {
-                result.Insert(0, i); // Add to front to maintain order
+                result.Add(i);
                 maxHeight = heights[i];
             }
         }
@@ -172,7 +184,7 @@ public class SunsetHills
     {
         int[] buildings = { 71, 55, 50, 65, 95, 68, 28, 34, 14 };
         var sunsetView = SolveSunsetHills(buildings);
-        Console.WriteLine(string.Join(", ", sunsetView)); // 0, 4, 5, 7, 8
+        Console.WriteLine(string.Join(", ", sunsetView)); // 0, 4 - Buildings 1 and 5
     }
 }`,
   },

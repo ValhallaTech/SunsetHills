@@ -85,22 +85,7 @@
                     </div>
                 </div>
 
-                <!-- Statistics -->
-                <div class="row mt-4">
-                    <div class="col-lg-10 mx-auto">
-                        <div class="statistics-wrapper bg-white rounded shadow-sm p-4">
-                            <h2 class="h5 mb-3">
-                                <i class="fa-solid fa-chart-pie text-info" aria-hidden="true"></i>
-                                Statistics
-                            </h2>
-                            <div id="statisticsDisplay" role="region" aria-live="polite">
-                                <!-- Statistics will be populated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Controls -->
+                <!-- Controls - MOVED HERE for better UX -->
                 <div class="row mt-4">
                     <div class="col-lg-10 mx-auto">
                         <!-- Main Controls -->
@@ -171,6 +156,21 @@
                     </div>
                 </div>
 
+                <!-- Statistics -->
+                <div class="row mt-4">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="statistics-wrapper bg-white rounded shadow-sm p-4">
+                            <h2 class="h5 mb-3">
+                                <i class="fa-solid fa-chart-pie text-info" aria-hidden="true"></i>
+                                Statistics
+                            </h2>
+                            <div id="statisticsDisplay" role="region" aria-live="polite">
+                                <!-- Statistics will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Results -->
                 <div class="row mt-5">
                     <div class="col-lg-10 mx-auto">
@@ -195,11 +195,14 @@
                                 How to use:
                             </h3>
                             <ul class="mb-0 small">
-                                <li>Click and drag any building up or down to change its height</li>
-                                <li>Buildings highlighted in gold/orange can see the sunset</li>
-                                <li>A building can see the sunset if all buildings to its right are shorter</li>
-                                <li>Use the Reset button to restore default heights</li>
-                                <li>Use the Randomize button to generate random building heights</li>
+                                <li>Buildings are arranged <strong>west to east</strong> (left to right)</li>
+                                <li>The <strong>sunset is to the west</strong> (left side of the chart)</li>
+                                <li>Buildings highlighted in <strong>orange</strong> can see the sunset</li>
+                                <li>A building can see the sunset if <strong>all buildings to its left are shorter</strong></li>
+                                <li>Use the <strong>Reset</strong> button to restore default heights</li>
+                                <li>Use the <strong>Randomize</strong> button to generate random building heights</li>
+                                <li>Try different <strong>preset scenarios</strong> from the dropdown</li>
+                                <li>Enter <strong>custom heights</strong> (comma-separated, 10-100) for manual testing</li>
                             </ul>
                         </div>
                     </div>
