@@ -266,6 +266,7 @@ export function resetBuildings() {
   
   if (chart) {
     chart.data.datasets[0].data = currentHeights;
+    chart.data.labels = currentHeights.map((_, i) => `Building ${i + 1}`);
     updateChart();
   }
 }
@@ -280,6 +281,91 @@ export function randomizeBuildings() {
     chart.data.datasets[0].data = currentHeights;
     updateChart();
   }
+}
+
+/**
+ * Loads a preset configuration
+ * @param {number[]} heights - Preset building heights
+ */
+export function loadPreset(heights) {
+  currentHeights = [...heights];
+  
+  if (chart) {
+    // Update data
+    chart.data.datasets[0].data = currentHeights;
+    chart.data.labels = currentHeights.map((_, i) => `Building ${i + 1}`);
+    updateChart();
+  }
+}
+
+/**
+ * Sets heights from manual input
+ * @param {string} input - Comma-separated heights
+ * @returns {boolean} - Success status
+ */
+export function setManualHeights(input) {
+  try {
+    const heights = input
+      .split(',')
+      .map((h) => parseInt(h.trim(), 10))
+      .filter((h) => !isNaN(h) && h >= 10 && h <= 100);
+
+    if (heights.length === 0) {
+      throw new Error('No valid heights found');
+    }
+
+    currentHeights = heights;
+
+    if (chart) {
+      chart.data.datasets[0].data = currentHeights;
+      chart.data.labels = currentHeights.map((_, i) => `Building ${i + 1}`);
+      updateChart();
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error setting manual heights:', error);
+    return false;
+  }
+}
+
+/**
+ * Adds a new building with random height
+ */
+export function addBuilding() {
+  if (currentHeights.length >= 20) {
+    return false; // Max 20 buildings
+  }
+
+  const newHeight = Math.floor(Math.random() * 91) + 10; // 10-100
+  currentHeights.push(newHeight);
+
+  if (chart) {
+    chart.data.datasets[0].data = currentHeights;
+    chart.data.labels = currentHeights.map((_, i) => `Building ${i + 1}`);
+    updateChart();
+  }
+
+  return true;
+}
+
+/**
+ * Removes the last building
+ */
+export function removeBuilding() {
+  if (currentHeights.length <= 1) {
+    return false; // Must have at least 1 building
+  }
+
+  currentHeights.pop();
+
+  if (chart) {
+    chart.data.datasets[0].data = currentHeights;
+    chart.data.labels = currentHeights.map((_, i) => `Building ${i + 1}`);
+    updateChart();
+  }
+
+  return true;
 }
 
 /**

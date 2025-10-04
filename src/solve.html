@@ -103,19 +103,70 @@
                 <!-- Controls -->
                 <div class="row mt-4">
                     <div class="col-lg-10 mx-auto">
-                        <div class="controls-wrapper text-center">
+                        <!-- Main Controls -->
+                        <div class="controls-wrapper text-center mb-3">
                             <button id="resetBtn" 
-                                    class="btn btn-secondary me-2" 
+                                    class="btn btn-secondary me-2 mb-2" 
                                     aria-label="Reset buildings to default heights">
                                 <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
                                 Reset
                             </button>
                             <button id="randomizeBtn" 
-                                    class="btn btn-primary" 
+                                    class="btn btn-primary me-2 mb-2" 
                                     aria-label="Randomize building heights">
                                 <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
                                 Randomize
                             </button>
+                            <button id="addBuildingBtn" 
+                                    class="btn btn-success me-2 mb-2" 
+                                    aria-label="Add a new building">
+                                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                                Add Building
+                            </button>
+                            <button id="removeBuildingBtn" 
+                                    class="btn btn-danger mb-2" 
+                                    aria-label="Remove last building">
+                                <i class="fa-solid fa-minus" aria-hidden="true"></i>
+                                Remove Building
+                            </button>
+                        </div>
+
+                        <!-- Preset Selector -->
+                        <div class="preset-wrapper bg-white rounded shadow-sm p-3 mb-3">
+                            <label for="presetSelect" class="form-label fw-bold">
+                                <i class="fa-solid fa-layer-group text-primary" aria-hidden="true"></i>
+                                Load Preset Scenario:
+                            </label>
+                            <select id="presetSelect" 
+                                    class="form-select" 
+                                    aria-label="Select a preset building configuration">
+                                <option value="">-- Choose a Preset --</option>
+                            </select>
+                        </div>
+
+                        <!-- Manual Input -->
+                        <div class="manual-input-wrapper bg-white rounded shadow-sm p-3">
+                            <label for="manualHeights" class="form-label fw-bold">
+                                <i class="fa-solid fa-keyboard text-info" aria-hidden="true"></i>
+                                Manual Input (comma-separated, 10-100):
+                            </label>
+                            <div class="input-group">
+                                <input type="text" 
+                                       id="manualHeights" 
+                                       class="form-control" 
+                                       placeholder="e.g., 50, 75, 25, 90, 40"
+                                       aria-label="Enter building heights separated by commas">
+                                <button id="applyManualBtn" 
+                                        class="btn btn-primary" 
+                                        type="button"
+                                        aria-label="Apply manual heights">
+                                    <i class="fa-solid fa-check" aria-hidden="true"></i>
+                                    Apply
+                                </button>
+                            </div>
+                            <div class="form-text">
+                                Enter heights between 10 and 100, separated by commas. Press Enter or click Apply.
+                            </div>
                         </div>
                     </div>
                 </div>
