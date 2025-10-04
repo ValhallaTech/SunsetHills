@@ -4,7 +4,7 @@
 
 > Interactive visualization of the classic Sunset Hills coding challenge.
 
-**Live Demo:** [https://your-site-name.netlify.app](https://sunsethills69.netlify.app)
+**Live Demo:** [https://sunsethills69.netlify.app](https://sunsethills69.netlify.app)
 
 ## About
 

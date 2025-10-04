@@ -194,7 +194,7 @@ After deployment, test:
 ## ?? Success!
 
 Once deployed, your site will be available at:
-- **Netlify URL:** `https://your-site-name.netlify.app`
+- **Netlify URL:** `https://sunsethills69.netlify.app`
 - **Custom domain:** (if configured)
 
 Share your beautiful Sunset Hills visualizer with the world! ???
