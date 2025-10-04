@@ -79,7 +79,7 @@
                         <div class="explanation-card bg-light rounded p-4 mb-4">
                             <h2 class="h4 mb-3">
                                 <i class="fa-solid fa-lightbulb text-warning" aria-hidden="true"></i>
-                                Approach
+                                Algorithm Approach
                             </h2>
                             <p>
                                 The most efficient solution uses a <strong>right-to-left scan</strong> with 
@@ -88,11 +88,54 @@
                                 than all buildings to its right.
                             </p>
                             
-                            <h3 class="h5 mt-4 mb-3">Complexity Analysis</h3>
-                            <ul>
-                                <li><strong>Time Complexity:</strong> O(n) - Single pass through the array</li>
-                                <li><strong>Space Complexity:</strong> O(1) - Only storing the max height and result indices</li>
-                            </ul>
+                            <h3 class="h5 mt-4 mb-3">
+                                <i class="fa-solid fa-chart-line text-info" aria-hidden="true"></i>
+                                Complexity Analysis
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="complexity-badge bg-white p-3 rounded mb-3">
+                                        <strong>Time Complexity:</strong><br>
+                                        <span class="badge bg-success">O(n)</span>
+                                        <small class="d-block text-muted mt-1">Single pass through array</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="complexity-badge bg-white p-3 rounded mb-3">
+                                        <strong>Space Complexity:</strong><br>
+                                        <span class="badge bg-primary">O(1)</span>
+                                        <small class="d-block text-muted mt-1">Constant extra space</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="h5 mt-4 mb-3">
+                                <i class="fa-solid fa-list-ol text-primary" aria-hidden="true"></i>
+                                Step-by-Step Process
+                            </h3>
+                            <ol class="mb-0">
+                                <li class="mb-2">Start from the <strong>rightmost building</strong> (it always sees the sunset)</li>
+                                <li class="mb-2">Track the <strong>maximum height</strong> encountered so far</li>
+                                <li class="mb-2">For each building moving left: if it's <strong>taller than the max</strong>, it can see the sunset</li>
+                                <li class="mb-2">Update the maximum height after each comparison</li>
+                                <li class="mb-2">Return the indices of buildings with sunset view</li>
+                            </ol>
+                        </div>
+
+                        <!-- Language Tabs -->
+                        <div class="language-tabs mb-3">
+                            <button class="lang-tab active" data-language="javascript">
+                                <i class="fa-brands fa-js" aria-hidden="true"></i> JavaScript
+                            </button>
+                            <button class="lang-tab" data-language="python">
+                                <i class="fa-brands fa-python" aria-hidden="true"></i> Python
+                            </button>
+                            <button class="lang-tab" data-language="java">
+                                <i class="fa-brands fa-java" aria-hidden="true"></i> Java
+                            </button>
+                            <button class="lang-tab" data-language="csharp">
+                                <i class="fa-solid fa-code" aria-hidden="true"></i> C#
+                            </button>
                         </div>
 
                         <!-- Code Display -->
@@ -100,7 +143,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h2 class="h5 mb-0">
                                     <i class="fa-solid fa-file-code" aria-hidden="true"></i>
-                                    sunsetHills.js
+                                    Implementation
                                 </h2>
                                 <button id="copyCodeBtn" 
                                         class="btn btn-sm btn-outline-secondary" 
@@ -110,39 +153,122 @@
                                 </button>
                             </div>
                             
-                            <div class="code-container" role="region" aria-label="JavaScript source code">
-                                <pre class="line-numbers"><code class="language-javascript" id="sourceCode">
-// Code will be loaded here via Prism.js
-// Placeholder for Phase 4
-                                </code></pre>
+                            <div id="codeDisplay" class="code-container" role="region" aria-label="Source code with syntax highlighting">
+                                <!-- Code will be populated by codeDisplay.js -->
                             </div>
+                        </div>
+
+                        <!-- Example Walkthrough -->
+                        <div class="example-card bg-light rounded p-4 mt-4">
+                            <h2 class="h5 mb-3">
+                                <i class="fa-solid fa-person-walking" aria-hidden="true"></i>
+                                Example Walkthrough
+                            </h2>
+                            <p><strong>Input:</strong> <code>[71, 55, 50, 65, 95, 68, 28, 34, 14]</code></p>
+                            
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Index</th>
+                                        <th>Height</th>
+                                        <th>Max So Far</th>
+                                        <th>Can See Sunset?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>14</td>
+                                        <td>0</td>
+                                        <td><span class="badge bg-success">Yes</span> (14 > 0)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>34</td>
+                                        <td>14</td>
+                                        <td><span class="badge bg-success">Yes</span> (34 > 14)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>28</td>
+                                        <td>34</td>
+                                        <td><span class="badge bg-danger">No</span> (28 ≤ 34)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>68</td>
+                                        <td>34</td>
+                                        <td><span class="badge bg-success">Yes</span> (68 > 34)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>95</td>
+                                        <td>68</td>
+                                        <td><span class="badge bg-success">Yes</span> (95 > 68)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>65</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (65 ≤ 95)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (50 ≤ 95)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>55</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (55 ≤ 95)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>71</td>
+                                        <td>95</td>
+                                        <td><span class="badge bg-danger">No</span> (71 ≤ 95)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <p class="mb-0">
+                                <strong>Output:</strong> <code>[0, 4, 5, 7, 8]</code> 
+                                <span class="text-muted">(Buildings 1, 5, 6, 8, and 9 can see the sunset)</span>
+                            </p>
                         </div>
 
                         <!-- Additional Resources -->
                         <div class="row mt-5">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <div class="resource-card border rounded p-4 h-100">
                                     <h3 class="h5">
                                         <i class="fa-solid fa-book text-primary" aria-hidden="true"></i>
-                                        Learn More
+                                        Related Problems
                                     </h3>
-                                    <p class="text-muted small">
-                                        This is a variation of the "Trapping Rain Water" and "Next Greater Element" problems.
+                                    <p class="text-muted small mb-2">
+                                        This algorithm is similar to:
                                     </p>
+                                    <ul class="small mb-0">
+                                        <li>Trapping Rain Water</li>
+                                        <li>Next Greater Element</li>
+                                        <li>Stock Span Problem</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <div class="resource-card border rounded p-4 h-100">
                                     <h3 class="h5">
                                         <i class="fa-solid fa-flask text-success" aria-hidden="true"></i>
-                                        Try It Out
+                                        Try It Yourself
                                     </h3>
                                     <p class="text-muted small mb-3">
                                         Test the algorithm with the interactive visualizer.
                                     </p>
                                     <a href="solve.html" class="btn btn-sm btn-primary">
                                         Go to Solver
-                                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                        <i class="fa-solid fa-arrow-right ms-1" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>

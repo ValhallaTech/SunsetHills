@@ -1,7 +1,6 @@
 // ============================================
 // Sunset Hills - Main Entry Point
 // ============================================
-
 // Import Bootstrap (CSS and JS)
 import 'bootstrap';
 
@@ -148,9 +147,23 @@ if (currentPage === 'solve.html') {
 
 // Initialize code display page
 if (currentPage === 'code.html') {
-  console.log('Code page - Prism.js will be added in Phase 4');
-  // TODO Phase 4: Import and initialize Prism
-  // import('./codeDisplay.js').then(({ initCodeDisplay }) => {
-  //   initCodeDisplay();
-  // });
+  // Dynamically import code display module
+  import('./codeDisplay.js').then(({ initCodeDisplay, copyCode }) => {
+    initCodeDisplay();
+
+    // Wire up copy button
+    const copyBtn = document.getElementById('copyCodeBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        // Get current active language
+        const activeTab = document.querySelector('.lang-tab.active');
+        const language = activeTab ? activeTab.getAttribute('data-language') : 'javascript';
+        copyCode(language);
+      });
+    }
+
+    console.log('Code display initialized with Prism.js');
+  }).catch((error) => {
+    console.error('Error initializing code display:', error);
+  });
 }
