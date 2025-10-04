@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+public class SunsetHills
+{
+    /// <summary>
+    /// Determines which buildings can see the sunset.
+    /// The sunset is to the WEST (left). Buildings face west.
+    /// A building can see the sunset if all buildings to its LEFT are shorter.
+    /// 
+    /// Time Complexity: O(n)
+    /// Space Complexity: O(1) excluding result list
+    /// </summary>
+    /// <param name="heights">Array of building heights (west to east)</param>
+    /// <returns>List of indices of buildings with sunset view</returns>
+    public static List<int> SolveSunsetHills(int[] heights)
+    {
+        var result = new List<int>();
+        
+        if (heights == null || heights.Length == 0)
+        {
+            return result;
+        }
+        
+        int maxHeight = 0;
+        
+        // Scan from left to right (west to east)
+        for (int i = 0; i < heights.Length; i++)
+        {
+            if (heights[i] > maxHeight)
+            {
+                result.Add(i);
+                maxHeight = heights[i];
+            }
+        }
+        
+        return result;
+    }
+    
+    public static void Main()
+    {
+        int[] buildings = { 71, 55, 50, 65, 95, 68, 28, 34, 14 };
+        var sunsetView = SolveSunsetHills(buildings);
+        Console.WriteLine(string.Join(", ", sunsetView)); // 0, 4 - Buildings 1 and 5
+    }
+}

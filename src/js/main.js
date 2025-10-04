@@ -12,6 +12,12 @@ import '@fortawesome/fontawesome-free/css/all.css';
 // Import custom styles
 import '../styles/custom.css';
 
+// Import theme toggle
+import { initThemeToggle } from './themeToggle.js';
+
+// Initialize theme toggle on all pages
+initThemeToggle();
+
 // Page-specific initialization
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 

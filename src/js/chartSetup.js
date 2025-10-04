@@ -3,15 +3,13 @@
 // ============================================
 
 import { Chart, registerables } from 'chart.js';
+import 'chartjs-plugin-dragdata';
 import { solveSunsetHills } from './sunsetHills.js';
 import { updateResults } from './resultsDisplay.js';
 import { calculateStatistics, updateStatisticsDisplay } from './statistics.js';
 
-// Register Chart.js components
+// Register Chart.js components (dragData plugin auto-registers itself)
 Chart.register(...registerables);
-
-// NOTE: Drag plugin temporarily disabled due to compatibility issues
-// Will be re-enabled once resolved
 
 // Default building heights
 const DEFAULT_HEIGHTS = [71, 55, 50, 65, 95, 68, 28, 34, 14];
@@ -23,7 +21,22 @@ let currentHeights = [...DEFAULT_HEIGHTS];
 let chart = null;
 
 /**
- * Initializes the Chart.js bar chart
+ * Gets theme-aware colors for the chart
+ * @returns {object} Color configuration based on current theme
+ */
+function getChartColors() {
+  const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+  
+  return {
+    gridColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+    textColor: isDark ? '#f8f9fa' : '#212529',
+    labelColor: isDark ? '#f8f9fa' : '#000000',
+    borderNoView: isDark ? 'rgba(139, 149, 161, 1)' : 'rgba(90, 98, 104, 1)',
+  };
+}
+
+/**
+ * Initializes the Chart.js bar chart with drag-and-drop functionality
  */
 export function initChart() {
   const canvas = document.getElementById('buildingsChart');
@@ -37,6 +50,9 @@ export function initChart() {
 
   // Calculate initial solution
   const solutionIndices = solveSunsetHills(currentHeights);
+  
+  // Get theme-aware colors
+  const colors = getChartColors();
 
   chart = new Chart(ctx, {
     type: 'bar',
@@ -54,7 +70,7 @@ export function initChart() {
           borderColor: currentHeights.map((_, index) =>
             solutionIndices.includes(index)
               ? 'rgba(255, 140, 0, 1)'
-              : 'rgba(90, 98, 104, 1)'
+              : colors.borderNoView
           ),
           borderWidth: 2,
           borderRadius: 4,
@@ -70,11 +86,32 @@ export function initChart() {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
+        dragData: {
+          round: 0,
+          showTooltip: true,
+          onDragStart: function (e, datasetIndex, index, value) {
+            // Allow dragging
+            return true;
+          },
+          onDrag: function (e, datasetIndex, index, value) {
+            // Constrain values between 10 and 100
+            if (value < 10) return false;
+            if (value > 100) return false;
+            return true;
+          },
+          onDragEnd: function (e, datasetIndex, index, value) {
+            // Update the height and refresh everything
+            currentHeights[index] = Math.round(value);
+            updateChart();
+          },
+        },
         legend: {
           display: true,
           position: 'top',
           labels: {
             generateLabels: function () {
+              // Always get fresh colors based on current theme
+              const currentColors = getChartColors();
               return [
                 {
                   text: 'Can See Sunset',
@@ -85,7 +122,7 @@ export function initChart() {
                 {
                   text: 'Cannot See Sunset',
                   fillStyle: 'rgba(108, 117, 125, 0.75)',
-                  strokeStyle: 'rgba(90, 98, 104, 1)',
+                  strokeStyle: currentColors.borderNoView,
                   lineWidth: 2,
                 },
               ];
@@ -95,6 +132,7 @@ export function initChart() {
               weight: 'bold',
             },
             padding: 15,
+            color: colors.textColor,
           },
         },
         title: {
@@ -108,6 +146,7 @@ export function initChart() {
             top: 10,
             bottom: 20,
           },
+          color: colors.textColor,
         },
         tooltip: {
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -140,7 +179,7 @@ export function initChart() {
           min: 0,
           max: 100,
           grid: {
-            color: 'rgba(0, 0, 0, 0.05)',
+            color: colors.gridColor,
             lineWidth: 1,
           },
           title: {
@@ -150,12 +189,14 @@ export function initChart() {
               size: 14,
               weight: 'bold',
             },
+            color: colors.textColor,
           },
           ticks: {
             stepSize: 10,
             font: {
               size: 11,
             },
+            color: colors.textColor,
           },
         },
         x: {
@@ -176,6 +217,7 @@ export function initChart() {
               size: 11,
               weight: '500',
             },
+            color: colors.textColor,
           },
         },
       },
@@ -189,11 +231,12 @@ export function initChart() {
         id: 'heightLabels',
         afterDatasetsDraw(chart) {
           const ctx = chart.ctx;
+          const colors = getChartColors();
           chart.data.datasets.forEach((dataset, i) => {
             const meta = chart.getDatasetMeta(i);
             meta.data.forEach((bar, index) => {
               const data = dataset.data[index];
-              ctx.fillStyle = '#000';
+              ctx.fillStyle = colors.labelColor;
               ctx.font = 'bold 12px sans-serif';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'bottom';
@@ -205,11 +248,91 @@ export function initChart() {
     ],
   });
 
+  // Listen for theme changes
+  window.addEventListener('themeChanged', handleThemeChange);
+
   // Initial updates
   updateResults(currentHeights, solutionIndices);
   updateStatisticsDisplay(calculateStatistics(currentHeights, solutionIndices));
   
-  console.log('Chart created successfully');
+  console.log('Chart created successfully with drag functionality enabled');
+}
+
+/**
+ * Handles theme change events
+ * @param {CustomEvent} event - Theme change event
+ */
+function handleThemeChange(event) {
+  if (!chart) return;
+  
+  console.log(`Theme changed to ${event.detail.theme} mode - updating chart`);
+  updateChartTheme();
+}
+
+/**
+ * Updates chart colors based on current theme
+ */
+function updateChartTheme() {
+  if (!chart) return;
+  
+  const colors = getChartColors();
+  const solutionIndices = solveSunsetHills(currentHeights);
+  
+  // Update border colors for non-sunset buildings
+  chart.data.datasets[0].borderColor = currentHeights.map((_, index) =>
+    solutionIndices.includes(index)
+      ? 'rgba(255, 140, 0, 1)'
+      : colors.borderNoView
+  );
+  
+  // Force legend to regenerate by replacing the generateLabels function
+  // This ensures strokeStyle uses current theme colors
+  if (chart.options.plugins.legend && chart.options.plugins.legend.labels) {
+    chart.options.plugins.legend.labels.generateLabels = function () {
+      // Get FRESH colors every time this is called
+      const currentColors = getChartColors();
+      return [
+        {
+          text: 'Can See Sunset',
+          fillStyle: 'rgba(255, 165, 0, 0.85)',
+          strokeStyle: 'rgba(255, 140, 0, 1)',
+          lineWidth: 2,
+        },
+        {
+          text: 'Cannot See Sunset',
+          fillStyle: 'rgba(108, 117, 125, 0.75)',
+          strokeStyle: currentColors.borderNoView,
+          lineWidth: 2,
+        },
+      ];
+    };
+    
+    // Update text color
+    chart.options.plugins.legend.labels.color = colors.textColor;
+  }
+  
+  // Title color
+  if (chart.options.plugins.title) {
+    chart.options.plugins.title.color = colors.textColor;
+  }
+  
+  // Y-axis colors
+  if (chart.options.scales.y) {
+    chart.options.scales.y.grid.color = colors.gridColor;
+    chart.options.scales.y.title.color = colors.textColor;
+    chart.options.scales.y.ticks.color = colors.textColor;
+  }
+  
+  // X-axis tick colors (keep title orange)
+  if (chart.options.scales.x && chart.options.scales.x.ticks) {
+    chart.options.scales.x.ticks.color = colors.textColor;
+  }
+  
+  // Force chart to update with new colors
+  // Use 'active' mode to force legend regeneration
+  chart.update('active');
+  
+  console.log(`Chart colors updated to ${colors.textColor}`);
 }
 
 /**
@@ -219,6 +342,7 @@ function updateChart() {
   if (!chart) return;
 
   const solutionIndices = solveSunsetHills(currentHeights);
+  const colors = getChartColors();
 
   // Update colors with smooth transition
   chart.data.datasets[0].backgroundColor = currentHeights.map((_, index) =>
@@ -230,13 +354,13 @@ function updateChart() {
   chart.data.datasets[0].borderColor = currentHeights.map((_, index) =>
     solutionIndices.includes(index)
       ? 'rgba(255, 140, 0, 1)'
-      : 'rgba(90, 98, 104, 1)'
+      : colors.borderNoView
   );
 
   chart.data.datasets[0].hoverBackgroundColor = currentHeights.map((_, index) =>
     solutionIndices.includes(index)
       ? 'rgba(255, 165, 0, 1)'
-      : 'rgba(108, 117, 125, 0.9)' // FIXED: Added closing paren
+      : 'rgba(108, 117, 125, 0.9)'
   );
 
   chart.update();

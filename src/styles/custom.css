@@ -7,6 +7,8 @@
    CSS CUSTOM PROPERTIES (VARIABLES)
    ============================================ */
 
+/* Light Mode (Default) */
+:root[data-bs-theme="light"],
 :root {
   /* Sunset Theme Colors */
   --color-primary: #ff6b35;
@@ -18,15 +20,36 @@
   --color-warning: #ffc107;
   --color-danger: #dc3545;
 
-  /* Neutrals */
+  /* Backgrounds */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #e9ecef;
   --color-dark-bg: #1a1a2e;
   --color-dark-text: #212529;
   --color-light-bg: #f8f9fa;
   --color-white: #ffffff;
 
+  /* Text Colors */
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-text-muted: #6c757d;
+
   /* Sunset Specific (for charts) */
   --color-sunset-view: #ffa500;
   --color-no-view: #6c757d;
+
+  /* Chart Colors */
+  --chart-bg: rgba(255, 245, 235, 0.15);
+  --chart-bg-hover: rgba(255, 235, 205, 0.25);
+  --chart-border: rgba(255, 165, 0, 0.1);
+  --chart-border-hover: rgba(255, 165, 0, 0.2);
+  --chart-grid-color: rgba(0, 0, 0, 0.05);
+  --chart-text-color: #212529;
+  --chart-label-color: #000000;
+
+  /* Card and Component Backgrounds */
+  --card-bg: #ffffff;
+  --card-border: #dee2e6;
 
   /* Typography */
   --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -50,6 +73,55 @@
   /* Transitions */
   --transition-base: all 0.2s ease-in-out;
   --transition-fade: opacity 0.15s linear;
+}
+
+/* Dark Mode */
+:root[data-bs-theme="dark"] {
+  /* Keep sunset theme colors (they work well in dark mode) */
+  --color-primary: #ff8c61;
+  --color-primary-light: #ffaa88;
+  --color-primary-dark: #ff6b35;
+
+  /* Backgrounds */
+  --color-bg-primary: #212529;
+  --color-bg-secondary: #1a1d20;
+  --color-bg-tertiary: #2c3034;
+  --color-dark-bg: #0d0e10;
+  --color-light-bg: #2c3034;
+  --color-white: #212529;
+
+  /* Text Colors */
+  --color-text-primary: #f8f9fa;
+  --color-text-secondary: #adb5bd;
+  --color-text-muted: #6c757d;
+
+  /* Keep sunset colors vibrant */
+  --color-sunset-view: #ffb84d;
+  --color-no-view: #8b95a1;
+
+  /* Chart Colors (Adjusted for dark background) */
+  --chart-bg: rgba(30, 30, 46, 0.3);
+  --chart-bg-hover: rgba(40, 40, 56, 0.5);
+  --chart-border: rgba(255, 165, 0, 0.2);
+  --chart-border-hover: rgba(255, 165, 0, 0.3);
+  --chart-grid-color: rgba(255, 255, 255, 0.1);
+  --chart-text-color: #f8f9fa;
+  --chart-label-color: #f8f9fa;
+
+  /* Card and Component Backgrounds */
+  --card-bg: #2c3034;
+  --card-border: #495057;
+
+  /* Shadows (lighter for dark mode) */
+  --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+  --box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth theme transitions */
+body.theme-transitioning,
+body.theme-transitioning * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
 }
 
 /* ============================================
@@ -580,7 +652,7 @@ h6 {
 }
 
 .code-card .code-container {
-  background-color: #2d2d2d;
+  background-color: #272822; /* Monokai/Okaidia background */
   border-radius: var(--border-radius-sm);
   padding: 0;
   overflow-x: auto;
@@ -594,55 +666,37 @@ h6 {
 }
 
 .code-card .code-container code {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Consolas', 'Monaco', 'Courier New', Courier, monospace;
   font-size: 0.875rem;
   line-height: 1.6;
 }
 
-.code-card #copyCodeBtn {
-  transition: var(--transition-base);
+/* Dark mode code card */
+:root[data-bs-theme="dark"] .code-card {
+  background: var(--card-bg) !important;
+  color: var(--color-text-primary);
 }
 
-.code-card #copyCodeBtn:hover {
-  transform: scale(1.05);
+:root[data-bs-theme="dark"] .code-card h2 {
+  color: var(--color-text-primary);
 }
 
-.example-card {
-  border-left: 4px solid var(--color-secondary);
-  box-shadow: var(--box-shadow-sm);
+/* Keep code blocks dark in both themes (Monokai-style) */
+.code-card .code-container,
+:root[data-bs-theme="dark"] .code-card .code-container {
+  background-color: #272822 !important; /* Monokai background - always dark */
 }
 
-.example-card table {
-  font-size: 0.9rem;
-}
-
-.example-card code {
-  background-color: #e9ecef;
-  padding: 0.2rem 0.4rem;
-  border-radius: 3px;
-  font-size: 0.875rem;
-}
-
-.resource-card {
-  transition: var(--transition-base);
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-}
-
-.resource-card:hover {
-  box-shadow: var(--box-shadow);
-  transform: translateY(-3px);
-  border-color: var(--color-primary) !important;
-}
-
-/* Prism.js theme adjustments */
-.code-container pre[class*='language-'] {
-  background: #2d2d2d;
+/* Prism Okaidia overrides for consistency */
+.code-card .code-container pre[class*="language-"],
+:root[data-bs-theme="dark"] .code-card .code-container pre[class*="language-"] {
+  background: #272822 !important;
   margin: 0;
 }
 
-.code-container code[class*='language-'] {
+.code-card .code-container code[class*="language-"],
+:root[data-bs-theme="dark"] .code-card .code-container code[class*="language-"] {
   background: transparent;
-  color: #ccc;
 }
 
 /* Responsive adjustments */
@@ -697,6 +751,240 @@ h6 {
 
 .bg-primary {
   background-color: var(--color-primary) !important;
+}
+
+/* ============================================
+   DARK MODE SPECIFIC OVERRIDES
+   ============================================ */
+
+/* Override Bootstrap utility classes in dark mode */
+:root[data-bs-theme="dark"] .bg-light {
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Force all main content headings to be visible in dark mode */
+:root[data-bs-theme="dark"] main h1,
+:root[data-bs-theme="dark"] main h2,
+:root[data-bs-theme="dark"] main h3,
+:root[data-bs-theme="dark"] main h4,
+:root[data-bs-theme="dark"] main h5,
+:root[data-bs-theme="dark"] main h6,
+:root[data-bs-theme="dark"] main .display-1,
+:root[data-bs-theme="dark"] main .display-2,
+:root[data-bs-theme="dark"] main .display-3,
+:root[data-bs-theme="dark"] main .display-4,
+:root[data-bs-theme="dark"] main .display-5,
+:root[data-bs-theme="dark"] main .display-6 {
+  color: var(--color-text-primary) !important;
+}
+
+/* Force lead text to be visible */
+:root[data-bs-theme="dark"] .lead {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Ensure all text in light backgrounds is visible in dark mode */
+:root[data-bs-theme="dark"] .bg-light *,
+:root[data-bs-theme="dark"] .bg-white * {
+  color: inherit;
+}
+
+:root[data-bs-theme="dark"] .bg-light h1,
+:root[data-bs-theme="dark"] .bg-light h2,
+:root[data-bs-theme="dark"] .bg-light h3,
+:root[data-bs-theme="dark"] .bg-light h4,
+:root[data-bs-theme="dark"] .bg-light h5,
+:root[data-bs-theme="dark"] .bg-light h6,
+:root[data-bs-theme="dark"] .bg-white h1,
+:root[data-bs-theme="dark"] .bg-white h2,
+:root[data-bs-theme="dark"] .bg-white h3,
+:root[data-bs-theme="dark"] .bg-white h4,
+:root[data-bs-theme="dark"] .bg-white h5,
+:root[data-bs-theme="dark"] .bg-white h6 {
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .bg-light p,
+:root[data-bs-theme="dark"] .bg-white p {
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .bg-light strong,
+:root[data-bs-theme="dark"] .bg-white strong {
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .bg-light .small,
+:root[data-bs-theme="dark"] .bg-white .small {
+  color: var(--color-text-secondary);
+}
+
+/* Dark mode adjustments for hero section */
+:root[data-bs-theme="dark"] .hero-section {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 53, 0.5) 0%,
+    rgba(255, 165, 0, 0.45) 50%,
+    rgba(255, 140, 0, 0.55) 100%
+  );
+}
+
+/* Dark mode chart wrapper */
+:root[data-bs-theme="dark"] .chart-wrapper {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 46, 0.3) 0%,
+    rgba(40, 40, 56, 0.4) 50%,
+    rgba(35, 35, 51, 0.5) 100%
+  ) !important;
+  border-color: var(--chart-border) !important;
+}
+
+:root[data-bs-theme="dark"] .chart-wrapper:hover {
+  border-color: var(--chart-border-hover) !important;
+  box-shadow: 0 8px 16px rgba(255, 165, 0, 0.15) !important;
+}
+
+/* Dark mode statistics and cards */
+:root[data-bs-theme="dark"] .stat-card {
+  background: linear-gradient(135deg, #2c3034 0%, #212529 100%) !important;
+  border-color: var(--card-border);
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .stat-value {
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .stat-mini {
+  background: #2c3034 !important;
+  border-color: var(--card-border);
+}
+
+/* Dark mode results wrapper */
+:root[data-bs-theme="dark"] .results-wrapper {
+  background: linear-gradient(135deg, #2c3034 0%, #212529 100%) !important;
+}
+
+/* Dark mode building cards */
+:root[data-bs-theme="dark"] .building-card {
+  background: linear-gradient(135deg, #3a3020 0%, #2c3034 100%) !important;
+  border-color: var(--color-sunset-view) !important;
+  box-shadow: 0 2px 4px rgba(255, 165, 0, 0.2);
+}
+
+:root[data-bs-theme="dark"] .building-card:hover {
+  box-shadow: 0 8px 16px rgba(255, 165, 0, 0.3);
+}
+
+/* Dark mode alerts */
+:root[data-bs-theme="dark"] .alert-info {
+  background: linear-gradient(135deg, #1a3a45 0%, #2c3034 100%) !important;
+  border-color: #17a2b8;
+  color: #b8e7f0;
+}
+
+/* Dark mode code section */
+:root[data-bs-theme="dark"] .code-section {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 30, 48, 0.3) 0%,
+    rgba(25, 35, 50, 0.5) 100%
+  );
+}
+
+/* Dark mode solver section */
+:root[data-bs-theme="dark"] .solver-section {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 25, 20, 0.2) 0%,
+    rgba(35, 30, 25, 0.3) 100%
+  );
+}
+
+/* Dark mode tech cards */
+:root[data-bs-theme="dark"] .tech-card {
+  background: var(--card-bg) !important;
+  border-color: var(--card-border);
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .tech-card h3,
+:root[data-bs-theme="dark"] .tech-card p {
+  color: var(--color-text-primary);
+}
+
+/* Dark mode explanation cards */
+:root[data-bs-theme="dark"] .explanation-card,
+:root[data-bs-theme="dark"] .example-card {
+  background: var(--card-bg) !important;
+  border-color: var(--card-border);
+  color: var(--color-text-primary);
+}
+
+:root[data-bs-theme="dark"] .explanation-card h2,
+:root[data-bs-theme="dark"] .explanation-card h3,
+:root[data-bs-theme="dark"] .explanation-card p,
+:root[data-bs-theme="dark"] .explanation-card li,
+:root[data-bs-theme="dark"] .example-card h2,
+:root[data-bs-theme="dark"] .example-card p {
+  color: var(--color-text-primary);
+}
+
+/* Fix code tags in dark mode */
+:root[data-bs-theme="dark"] .example-card code,
+:root[data-bs-theme="dark"] .explanation-card code,
+:root[data-bs-theme="dark"] code {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffc107 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Dark mode toast notifications */
+:root[data-bs-theme="dark"] .toast {
+  background: #2c3034 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+:root[data-bs-theme="dark"] .toast-success {
+  background: linear-gradient(135deg, #1a3a2e 0%, #2c3034 100%) !important;
+}
+
+:root[data-bs-theme="dark"] .toast-error {
+  background: linear-gradient(135deg, #3a1a1f 0%, #2c3034 100%) !important;
+}
+
+:root[data-bs-theme="dark"] .toast-info {
+  background: linear-gradient(135deg, #1a3a45 0%, #2c3034 100%) !important;
+}
+
+:root[data-bs-theme="dark"] .toast-warning {
+  background: linear-gradient(135deg, #3a3020 0%, #2c3034 100%) !important;
+}
+
+/* Dark mode content section (home page) */
+:root[data-bs-theme="dark"] .content-section {
+  background-color: var(--color-bg-secondary) !important;
+}
+
+/* Dark mode tech section */
+:root[data-bs-theme="dark"] .tech-section {
+  background-color: var(--color-bg-primary) !important;
+}
+
+/* Dark mode feature list */
+:root[data-bs-theme="dark"] .feature-list li {
+  color: var(--color-text-primary);
 }
 
 /* ============================================

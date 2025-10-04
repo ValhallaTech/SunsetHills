@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class SunsetHills {
+    /**
+     * Determines which buildings can see the sunset.
+     * The sunset is to the WEST (left). Buildings face west.
+     * A building can see the sunset if all buildings to its LEFT are shorter.
+     * 
+     * Time Complexity: O(n)
+     * Space Complexity: O(1) excluding result list
+     * 
+     * @param heights Array of building heights (west to east)
+     * @return List of indices of buildings with sunset view
+     */
+    public static List<Integer> solveSunsetHills(int[] heights) {
+        List<Integer> result = new ArrayList<>();
+        
+        if (heights == null || heights.length == 0) {
+            return result;
+        }
+        
+        int maxHeight = 0;
+        
+        // Scan from left to right (west to east)
+        for (int i = 0; i < heights.length; i++) {
+            if (heights[i] > maxHeight) {
+                result.add(i);
+                maxHeight = heights[i];
+            }
+        }
+        
+        return result;
+    }
+    
+    public static void main(String[] args) {
+        int[] buildings = {71, 55, 50, 65, 95, 68, 28, 34, 14};
+        List<Integer> sunsetView = solveSunsetHills(buildings);
+        System.out.println(sunsetView); // [0, 4] - Buildings 1 and 5
+    }
+}

@@ -962,6 +962,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@parcel/transformer-inline-string@npm:2.16.0":
+  version: 2.16.0
+  resolution: "@parcel/transformer-inline-string@npm:2.16.0"
+  dependencies:
+    "@parcel/plugin": "npm:2.16.0"
+  checksum: 10c0/515dfaf269b2e6d80d8aaf3297dacc69930b60aa0427d03a00fa4dd9ffe6460cda6ee5c304f6763e82d16987232b26ff427856dd2e318e61d015601951ca00c4
+  languageName: node
+  linkType: hard
+
 "@parcel/transformer-js@npm:2.16.0":
   version: 2.16.0
   resolution: "@parcel/transformer-js@npm:2.16.0"
@@ -1638,7 +1647,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chartjs-plugin-dragdata@npm:^2.2.5":
+"chartjs-plugin-dragdata@npm:2.3.1":
   version: 2.3.1
   resolution: "chartjs-plugin-dragdata@npm:2.3.1"
   dependencies:
@@ -3185,10 +3194,11 @@ __metadata:
   resolution: "sunset-hills@workspace:."
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^7.1.0"
+    "@parcel/transformer-inline-string": "npm:2.16.0"
     "@popperjs/core": "npm:^2.11.8"
     bootstrap: "npm:^5.3.8"
     chart.js: "npm:^4.5.0"
-    chartjs-plugin-dragdata: "npm:^2.2.5"
+    chartjs-plugin-dragdata: "npm:2.3.1"
     eslint: "npm:^9.17.0"
     parcel: "npm:^2.16.0"
     prettier: "npm:^3.4.2"

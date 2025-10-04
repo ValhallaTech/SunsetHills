@@ -1,192 +1,47 @@
 // ============================================
 // Code Display Module - Prism.js Integration
+// Dynamic Code Loading
 // ============================================
 
 import Prism from 'prismjs';
 
-// Import Prism themes and languages
-import 'prismjs/themes/prism-tomorrow.css';
+// Import Prism Okaidia theme (Monokai-style)
+import 'prismjs/themes/prism-okaidia.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-csharp';
 
+// Import code examples as raw text using bundle-text: prefix for Parcel
+import javascriptCode from 'bundle-text:../code-examples/javascript.txt';
+import pythonCode from 'bundle-text:../code-examples/python.txt';
+import javaCode from 'bundle-text:../code-examples/java.txt';
+import csharpCode from 'bundle-text:../code-examples/csharp.txt';
+
 /**
  * Code examples for the Sunset Hills algorithm
+ * Now dynamically loaded from actual source files!
  */
 export const CODE_EXAMPLES = {
   javascript: {
     name: 'JavaScript',
     icon: 'fa-brands fa-js',
-    code: `/**
- * Determines which buildings can see the sunset.
- * The sunset is to the WEST (left). Buildings face west.
- * A building can see the sunset if all buildings to its LEFT are shorter.
- * 
- * Time Complexity: O(n)
- * Space Complexity: O(1) excluding result array
- * 
- * @param {number[]} heights - Array of building heights (west to east)
- * @returns {number[]} - Indices of buildings with sunset view
- */
-function solveSunsetHills(heights) {
-  if (!heights || heights.length === 0) {
-    return [];
-  }
-
-  const result = [];
-  let maxHeight = 0;
-
-  // Scan from left to right (west to east)
-  for (let i = 0; i < heights.length; i++) {
-    if (heights[i] > maxHeight) {
-      result.push(i);
-      maxHeight = heights[i];
-    }
-  }
-
-  return result;
-}
-
-// Example usage
-const buildings = [71, 55, 50, 65, 95, 68, 28, 34, 14];
-const sunsetView = solveSunsetHills(buildings);
-console.log(sunsetView); // [0, 4] - Buildings 1 and 5`,
+    code: javascriptCode,
   },
-
   python: {
     name: 'Python',
     icon: 'fa-brands fa-python',
-    code: `def solve_sunset_hills(heights):
-    """
-    Determines which buildings can see the sunset.
-    The sunset is to the WEST (left). Buildings face west.
-    A building can see the sunset if all buildings to its LEFT are shorter.
-    
-    Time Complexity: O(n)
-    Space Complexity: O(1) excluding result list
-    
-    Args:
-        heights: List of building heights (west to east)
-    
-    Returns:
-        List of indices of buildings with sunset view
-    """
-    if not heights:
-        return []
-    
-    result = []
-    max_height = 0
-    
-    # Scan from left to right (west to east)
-    for i in range(len(heights)):
-        if heights[i] > max_height:
-            result.append(i)
-            max_height = heights[i]
-    
-    return result
-
-
-# Example usage
-buildings = [71, 55, 50, 65, 95, 68, 28, 34, 14]
-sunset_view = solve_sunset_hills(buildings)
-print(sunset_view)  # [0, 4] - Buildings 1 and 5`,
+    code: pythonCode,
   },
-
   java: {
     name: 'Java',
     icon: 'fa-brands fa-java',
-    code: `import java.util.*;
-
-public class SunsetHills {
-    /**
-     * Determines which buildings can see the sunset.
-     * The sunset is to the WEST (left). Buildings face west.
-     * A building can see the sunset if all buildings to its LEFT are shorter.
-     * 
-     * Time Complexity: O(n)
-     * Space Complexity: O(1) excluding result list
-     * 
-     * @param heights Array of building heights (west to east)
-     * @return List of indices of buildings with sunset view
-     */
-    public static List<Integer> solveSunsetHills(int[] heights) {
-        List<Integer> result = new ArrayList<>();
-        
-        if (heights == null || heights.length == 0) {
-            return result;
-        }
-        
-        int maxHeight = 0;
-        
-        // Scan from left to right (west to east)
-        for (int i = 0; i < heights.length; i++) {
-            if (heights[i] > maxHeight) {
-                result.add(i);
-                maxHeight = heights[i];
-            }
-        }
-        
-        return result;
-    }
-    
-    public static void main(String[] args) {
-        int[] buildings = {71, 55, 50, 65, 95, 68, 28, 34, 14};
-        List<Integer> sunsetView = solveSunsetHills(buildings);
-        System.out.println(sunsetView); // [0, 4] - Buildings 1 and 5
-    }
-}`,
+    code: javaCode,
   },
-
   csharp: {
     name: 'C#',
     icon: 'fa-solid fa-code',
-    code: `using System;
-using System.Collections.Generic;
-
-public class SunsetHills
-{
-    /// <summary>
-    /// Determines which buildings can see the sunset.
-    /// The sunset is to the WEST (left). Buildings face west.
-    /// A building can see the sunset if all buildings to its LEFT are shorter.
-    /// 
-    /// Time Complexity: O(n)
-    /// Space Complexity: O(1) excluding result list
-    /// </summary>
-    /// <param name="heights">Array of building heights (west to east)</param>
-    /// <returns>List of indices of buildings with sunset view</returns>
-    public static List<int> SolveSunsetHills(int[] heights)
-    {
-        var result = new List<int>();
-        
-        if (heights == null || heights.Length == 0)
-        {
-            return result;
-        }
-        
-        int maxHeight = 0;
-        
-        // Scan from left to right (west to east)
-        for (int i = 0; i < heights.Length; i++)
-        {
-            if (heights[i] > maxHeight)
-            {
-                result.Add(i);
-                maxHeight = heights[i];
-            }
-        }
-        
-        return result;
-    }
-    
-    public static void Main()
-    {
-        int[] buildings = { 71, 55, 50, 65, 95, 68, 28, 34, 14 };
-        var sunsetView = SolveSunsetHills(buildings);
-        Console.WriteLine(string.Join(", ", sunsetView)); // 0, 4 - Buildings 1 and 5
-    }
-}`,
+    code: csharpCode,
   },
 };
 
@@ -221,7 +76,7 @@ export function initCodeDisplay() {
     });
   });
 
-  console.log('Code display initialized with Prism.js');
+  console.log('Code display initialized with dynamic code loading');
 }
 
 /**

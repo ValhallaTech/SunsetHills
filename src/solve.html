@@ -20,7 +20,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                <i class="fa-solid fa-mountain-sun" aria-hidden="true"></i>
                 <span>Sunset Hills</span>
             </a>
             <button class="navbar-toggler" 
@@ -55,6 +55,16 @@
                             <span class="visually-hidden">(opens in new window)</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <button id="theme-toggle" 
+                                class="btn btn-sm btn-outline-light ms-2" 
+                                aria-label="Toggle dark mode"
+                                aria-pressed="false"
+                                title="Switch to dark mode">
+                            <i class="fa-solid fa-moon" id="theme-icon" aria-hidden="true"></i>
+                            <span class="visually-hidden">Toggle dark mode</span>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -68,7 +78,7 @@
                     <div class="col-lg-12 text-center">
                         <h1 class="display-5 mb-3">Interactive Solver</h1>
                         <p class="lead text-muted">
-                            Drag the buildings up or down to adjust their heights
+                            Drag buildings up or down to adjust heights, or use the controls below
                         </p>
                     </div>
                 </div>
@@ -199,6 +209,7 @@
                                 <li>The <strong>sunset is to the west</strong> (left side of the chart)</li>
                                 <li>Buildings highlighted in <strong>orange</strong> can see the sunset</li>
                                 <li>A building can see the sunset if <strong>all buildings to its left are shorter</strong></li>
+                                <li><strong>Drag any bar up or down</strong> to adjust building heights in real-time</li>
                                 <li>Use the <strong>Reset</strong> button to restore default heights</li>
                                 <li>Use the <strong>Randomize</strong> button to generate random building heights</li>
                                 <li>Try different <strong>preset scenarios</strong> from the dropdown</li>
