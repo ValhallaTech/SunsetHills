@@ -273,10 +273,12 @@ h6 {
 
 .chart-wrapper {
   min-height: 400px;
+  position: relative;
 }
 
 .chart-wrapper canvas {
   max-height: 400px;
+  cursor: ns-resize; /* Show vertical resize cursor for dragging */
 }
 
 .controls-wrapper {
@@ -289,6 +291,50 @@ h6 {
 
 .results-content {
   font-size: 1.1rem;
+}
+
+/* Building cards in results */
+.building-card {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-sunset-view) !important;
+  transition: var(--transition-base);
+}
+
+.building-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow);
+}
+
+.buildings-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* Instructions alert */
+.alert-info ul {
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.alert-info ul li {
+  margin-bottom: 0.25rem;
+}
+
+/* Responsive chart */
+@media (max-width: 768px) {
+  .chart-wrapper {
+    min-height: 300px;
+  }
+
+  .chart-wrapper canvas {
+    max-height: 300px;
+  }
+
+  .building-card {
+    min-width: 120px !important;
+  }
 }
 
 /* ============================================
