@@ -8,17 +8,19 @@
   # Publish directory - where Parcel outputs the bundled files
   publish = "dist"
   
-  # Node.js version to use
+  # Base directory for build
+  base = "."
+  
+  # Node.js version to use (exact version for consistency)
   [build.environment]
     NODE_VERSION = "22.20.0"
 
-# Redirect rules for SPA behavior (optional, for clean URLs)
+# Redirect rules for SPA behavior
+# Routes all URLs to index.html for client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
-  conditions = {Role = ["admin"]}
 
 # Headers for security and performance
 [[headers]]
@@ -29,32 +31,37 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Cache static assets (JavaScript)
 [[headers]]
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Cache static assets (CSS)
 [[headers]]
   for = "/*.css"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Cache fonts
 [[headers]]
   for = "/*.woff2"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/index.html"
+  for = "/*.ttf"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
 
+# Cache images (favicons)
 [[headers]]
-  for = "/solve.html"
+  for = "/images/*"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
 
+# No cache for HTML files (always fresh)
 [[headers]]
-  for = "/code.html"
+  for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
