@@ -4,24 +4,24 @@
 
 > Interactive visualization of the classic Sunset Hills coding challenge.
 
-?? **Live Demo:** [https://your-site-name.netlify.app](https://your-site-name.netlify.app)
+**Live Demo:** [https://your-site-name.netlify.app](https://your-site-name.netlify.app)
 
 ## About
 
 The Sunset Hills problem asks: Given an array of building heights arranged from **west to east**, which buildings can see the sunset to the **west**? The sun sets in the west (the left side of the array). A building can see the sunset if all buildings to its **left** (west) are strictly shorter than it.
 
 This project provides an interactive, visual solution where you can:
-- ?? Drag building bars to adjust heights in real-time
-- ?? See instant visualization of which buildings have a sunset view
-- ?? Toggle between light and dark themes
-- ?? Explore the O(n) algorithm with code in JavaScript, Python, Java, and C#
-- ?? Use on any device with responsive design
+- Drag building bars to adjust heights in real-time
+- See instant visualization of which buildings have a sunset view
+- Toggle between light and dark themes
+- Explore the O(n) algorithm with code in JavaScript, Python, Java, and C#
+- Use on any device with responsive design
 
-## ? Features
+## Features
 
 ### Interactive Solver
 - **Drag-and-Drop Chart** - Adjust building heights by dragging bars up/down
-- **Color-Coded Buildings** - Orange = sunset view ??, Gray = blocked
+- **Color-Coded Buildings** - Orange = sunset view, Gray = blocked
 - **12 Preset Scenarios** - Test edge cases and common patterns
 - **Manual Input** - Enter custom heights (comma-separated)
 - **Dynamic Controls** - Add/remove buildings (1-20 range)
@@ -30,11 +30,11 @@ This project provides an interactive, visual solution where you can:
 - **Toast Notifications** - Clear user feedback
 
 ### Dark Mode
-- ?? System preference detection
-- ?? LocalStorage persistence
-- ?? Smooth color transitions
-- ?? Chart theme adaptation
-- ?? Monokai code theme
+- System preference detection
+- LocalStorage persistence
+- Smooth color transitions
+- Chart theme adaptation
+- Monokai code theme
 
 ### Code Display
 - **4 Languages** - JavaScript, Python, Java, C#
@@ -48,7 +48,7 @@ This project provides an interactive, visual solution where you can:
 - **Space Complexity:** O(1) - Constant extra space
 - **Method:** Left-to-right scan with running maximum
 
-## ?? Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 22.20.0 LTS (or compatible version)
@@ -77,7 +77,7 @@ This project provides an interactive, visual solution where you can:
    http://localhost:1234
    ```
 
-## ?? Build & Deploy
+## Build & Deploy
 
 ### Local Production Build
 
@@ -107,7 +107,7 @@ netlify init
 netlify deploy --prod
 ```
 
-## ??? Tech Stack
+## Tech Stack
 
 ### Frontend
 - **Bootstrap 5.3.8** - Responsive UI framework
@@ -126,7 +126,7 @@ netlify deploy --prod
 - **Netlify** - Hosting with CDN
 - **Node.js 22.20.0** - Build environment
 
-## ?? Scripts
+## Scripts
 
 | Command | Description |
 |---------|-------------|
@@ -136,19 +136,19 @@ netlify deploy --prod
 | `yarn lint` | Lint JavaScript files with ESLint |
 | `yarn format` | Format code with Prettier |
 
-## ? Accessibility
+## Accessibility
 
 This project follows **WCAG 2.1 AA** standards:
-- ? Semantic HTML5 elements
-- ? WAI-ARIA landmarks and labels
-- ? Keyboard navigation support
-- ? Skip to main content link
-- ? Sufficient color contrast (4.5:1+ ratio)
-- ? Focus indicators on all interactive elements
-- ? Screen reader friendly
-- ? Reduced motion support (`prefers-reduced-motion`)
+- Semantic HTML5 elements
+- WAI-ARIA landmarks and labels
+- Keyboard navigation support
+- Skip to main content link
+- Sufficient color contrast (4.5:1+ ratio)
+- Focus indicators on all interactive elements
+- Screen reader friendly
+- Reduced motion support (`prefers-reduced-motion`)
 
-## ?? Project Structure
+## Project Structure
 
 ```
 SunsetHills/
@@ -182,14 +182,14 @@ SunsetHills/
 ??? README.md
 ```
 
-## ?? Browser Support
+## Browser Support
 
 - Chrome/Edge (latest 2 versions)
 - Firefox (latest 2 versions)
 - Safari (latest 2 versions)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
-## ?? Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -199,35 +199,35 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## ?? License
+## License
 
 MIT License - see LICENSE file for details
 
-## ?? Author
+## Author
 
 **ValhallaTech**
 - GitHub: [@ValhallaTech](https://github.com/ValhallaTech)
 - Repository: [SunsetHills](https://github.com/ValhallaTech/SunsetHills)
 
-## ?? Acknowledgments
+## Acknowledgments
 
 - Bootstrap team for the amazing UI framework
 - Chart.js for the powerful charting library
 - Prism.js for beautiful syntax highlighting
 - Font Awesome for the icon set
 
-## ?? Changelog
+## Changelog
 
 ### v1.0.0 - Initial Release
-- ? Interactive Chart.js visualization with drag-and-drop
-- ? Dark mode with theme persistence
-- ? Dynamic code examples in 4 languages
-- ? 12 preset scenarios
-- ? Real-time statistics
-- ? Mobile responsive design
-- ? WCAG 2.1 AA accessibility
-- ? Netlify deployment ready
+- Interactive Chart.js visualization with drag-and-drop
+- Dark mode with theme persistence
+- Dynamic code examples in 4 languages
+- 12 preset scenarios
+- Real-time statistics
+- Mobile responsive design
+- WCAG 2.1 AA accessibility
+- Netlify deployment ready
 
 ---
 
-**Built with ?? using modern web technologies**
+**Built with love using modern web technologies**
