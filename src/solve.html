@@ -76,11 +76,26 @@
                 <!-- Chart Container -->
                 <div class="row mt-4">
                     <div class="col-lg-10 mx-auto">
-                        <div class="chart-wrapper bg-white rounded shadow-sm p-4">
+                        <div class="chart-wrapper bg-white rounded shadow-sm p-4 sunset-gradient-bg">
                             <canvas id="buildingsChart" 
                                     role="img" 
                                     aria-label="Interactive bar chart showing building heights. Drag bars to adjust heights.">
                             </canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="row mt-4">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="statistics-wrapper bg-white rounded shadow-sm p-4">
+                            <h2 class="h5 mb-3">
+                                <i class="fa-solid fa-chart-pie text-info" aria-hidden="true"></i>
+                                Statistics
+                            </h2>
+                            <div id="statisticsDisplay" role="region" aria-live="polite">
+                                <!-- Statistics will be populated by JavaScript -->
+                            </div>
                         </div>
                     </div>
                 </div>
