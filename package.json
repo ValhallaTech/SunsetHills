@@ -1,0 +1,31 @@
+{
+  "name": "sunset-hills",
+  "version": "1.0.0",
+  "description": "Interactive Sunset Hills coding challenge visualizer",
+  "scripts": {
+    "dev": "parcel src/index.html src/solve.html src/code.html",
+    "build": "parcel build src/index.html src/solve.html src/code.html --public-url ./",
+    "clean": "rimraf dist .parcel-cache",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.{js,html,css,scss}\""
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.0",
+    "chartjs-plugin-dragdata": "^2.2.5",
+    "prismjs": "^1.30.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "parcel": "^2.16.0",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "> 0.2%"
+  ]
+}

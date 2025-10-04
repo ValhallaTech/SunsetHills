@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Sunset Hills solver - Drag buildings to adjust heights and see which ones can view the sunset">
+    <meta name="author" content="ValhallaTech">
+    <title>Sunset Hills | Solve</title>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link visually-hidden-focusable">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                <span>Sunset Hills</span>
+            </a>
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fa-solid fa-house" aria-hidden="true"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="solve.html">
+                            <i class="fa-solid fa-chart-column" aria-hidden="true"></i> Solve
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="code.html">
+                            <i class="fa-solid fa-code" aria-hidden="true"></i> Code
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/ValhallaTech/SunsetHills" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+                            <span class="visually-hidden">(opens in new window)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="solver-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="display-5 mb-3">Interactive Solver</h1>
+                        <p class="lead text-muted">
+                            Drag the buildings up or down to adjust their heights
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="row mt-4">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="chart-wrapper bg-white rounded shadow-sm p-4">
+                            <canvas id="buildingsChart" 
+                                    role="img" 
+                                    aria-label="Interactive bar chart showing building heights. Drag bars to adjust heights.">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="row mt-4">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="controls-wrapper text-center">
+                            <button id="resetBtn" 
+                                    class="btn btn-secondary me-2" 
+                                    aria-label="Reset buildings to default heights">
+                                <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                                Reset
+                            </button>
+                            <button id="randomizeBtn" 
+                                    class="btn btn-primary" 
+                                    aria-label="Randomize building heights">
+                                <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
+                                Randomize
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="row mt-5">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="results-wrapper bg-light rounded p-4" role="region" aria-live="polite" aria-atomic="true">
+                            <h2 class="h4 mb-3">
+                                <i class="fa-solid fa-sun text-warning" aria-hidden="true"></i>
+                                Buildings with Sunset View
+                            </h2>
+                            <div id="resultsOutput" class="results-content">
+                                <p class="text-muted">Adjust the buildings to see which ones can see the sunset...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="row mt-4">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="alert alert-info" role="region" aria-labelledby="instructions-heading">
+                            <h3 id="instructions-heading" class="h6 alert-heading">
+                                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                                How to use:
+                            </h3>
+                            <ul class="mb-0 small">
+                                <li>Click and drag any building up or down to change its height</li>
+                                <li>Buildings highlighted in gold/orange can see the sunset</li>
+                                <li>A building can see the sunset if all buildings to its right are shorter</li>
+                                <li>Use the Reset button to restore default heights</li>
+                                <li>Use the Randomize button to generate random building heights</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 ValhallaTech. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="https://github.com/ValhallaTech" class="text-white me-3" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        <span class="visually-hidden">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>

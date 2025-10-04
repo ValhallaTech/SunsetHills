@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Sunset Hills coding challenge visualizer - Adjust building heights and see which ones can see the sunset">
+    <meta name="author" content="ValhallaTech">
+    <title>Sunset Hills | Home</title>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link visually-hidden-focusable">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                <span>Sunset Hills</span>
+            </a>
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">
+                            <i class="fa-solid fa-house" aria-hidden="true"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="solve.html">
+                            <i class="fa-solid fa-chart-column" aria-hidden="true"></i> Solve
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="code.html">
+                            <i class="fa-solid fa-code" aria-hidden="true"></i> Code
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/ValhallaTech/SunsetHills" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+                            <span class="visually-hidden">(opens in new window)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="hero-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="display-4 mt-5">
+                            <i class="fa-solid fa-building text-primary" aria-hidden="true"></i>
+                            Sunset Hills
+                        </h1>
+                        <p class="lead mt-3">
+                            Visualize and solve the classic Sunset Hills coding challenge
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="h3 mb-4">The Challenge</h2>
+                        <p>
+                            Given an array of building heights, determine which buildings can see the sunset. 
+                            A building can see the sunset if all buildings to its right (west direction) are 
+                            strictly shorter than it.
+                        </p>
+                        
+                        <h3 class="h4 mt-4 mb-3">How It Works</h3>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fa-solid fa-check-circle text-success" aria-hidden="true"></i>
+                                Adjust building heights interactively with drag-and-drop
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check-circle text-success" aria-hidden="true"></i>
+                                See real-time visualization of which buildings have a sunset view
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check-circle text-success" aria-hidden="true"></i>
+                                Learn the algorithm with detailed code explanations
+                            </li>
+                        </ul>
+
+                        <div class="text-center mt-5">
+                            <a href="solve.html" class="btn btn-primary btn-lg">
+                                <i class="fa-solid fa-play" aria-hidden="true"></i>
+                                Try It Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <h2 class="h3 mb-4 text-center">Built With Modern Web Technologies</h2>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="tech-card text-center p-4">
+                                    <i class="fa-brands fa-bootstrap fa-3x mb-3 text-primary" aria-hidden="true"></i>
+                                    <h3 class="h5">Bootstrap 5</h3>
+                                    <p class="text-muted">Responsive design framework</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="tech-card text-center p-4">
+                                    <i class="fa-solid fa-chart-line fa-3x mb-3 text-success" aria-hidden="true"></i>
+                                    <h3 class="h5">Chart.js</h3>
+                                    <p class="text-muted">Interactive data visualization</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="tech-card text-center p-4">
+                                    <i class="fa-brands fa-js fa-3x mb-3 text-warning" aria-hidden="true"></i>
+                                    <h3 class="h5">ES6+ JavaScript</h3>
+                                    <p class="text-muted">Modern algorithmic solution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 ValhallaTech. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="https://github.com/ValhallaTech" class="text-white me-3" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        <span class="visually-hidden">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
