@@ -1,6 +1,6 @@
 # Sunset Hills
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-SITE-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE-NAME/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-SITE-ID/deploy-status)](https://app.netlify.com/sites/sunsethills69/deploys)
 
 > Interactive visualization of the classic Sunset Hills coding challenge.
 
