@@ -21,7 +21,7 @@
     "@parcel/transformer-inline-string": "2.16.0",
     "eslint": "^9.17.0",
     "parcel": "^2.16.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.8.2",
     "rimraf": "^6.0.1"
   },
   "browserslist": [
