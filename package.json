@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-inline-string": "2.16.0",
-    "eslint": "^9.17.0",
+    "eslint": "^10.2.0",
     "parcel": "^2.16.0",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1"
