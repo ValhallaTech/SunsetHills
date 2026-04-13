@@ -21,7 +21,7 @@ describe('codeDisplay module', () => {
     });
 
     test('each example has name, icon, and code', () => {
-      for (const [key, example] of Object.entries(CODE_EXAMPLES)) {
+      for (const example of Object.values(CODE_EXAMPLES)) {
         expect(example).toHaveProperty('name');
         expect(example).toHaveProperty('icon');
         expect(example).toHaveProperty('code');
