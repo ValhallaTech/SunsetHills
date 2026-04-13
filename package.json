@@ -7,7 +7,9 @@
     "build": "parcel build src/index.html src/solve.html src/code.html --public-url ./",
     "clean": "rimraf dist .parcel-cache",
     "lint": "eslint src/**/*.js",
-    "format": "prettier --write \"src/**/*.{js,html,css,scss}\""
+    "format": "prettier --write \"src/**/*.{js,html,css,scss}\"",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
@@ -18,8 +20,13 @@
     "prismjs": "^1.30.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
     "@parcel/transformer-inline-string": "2.16.4",
+    "babel-jest": "^30.3.0",
     "eslint": "^10.2.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "parcel": "^2.16.4",
     "prettier": "^3.8.2",
     "rimraf": "^6.1.3"
