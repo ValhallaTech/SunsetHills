@@ -94,10 +94,15 @@ function displayCode(language) {
 
   // Set the code content
   const languageClass = language === 'csharp' ? 'language-csharp' : `language-${language}`;
-  
-  codeDisplay.innerHTML = `<pre><code class="${languageClass}">${escapeHtml(
-    example.code
-  )}</code></pre>`;
+
+  // Build DOM safely (avoid interpreting dynamic strings as HTML)
+  codeDisplay.textContent = '';
+  const pre = document.createElement('pre');
+  const code = document.createElement('code');
+  code.className = languageClass;
+  code.textContent = example.code;
+  pre.appendChild(code);
+  codeDisplay.appendChild(pre);
 
   // Re-highlight with Prism
   Prism.highlightAll();
