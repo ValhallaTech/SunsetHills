@@ -1,0 +1,29 @@
+{
+  "testEnvironment": "jsdom",
+  "roots": ["<rootDir>/src"],
+  "testMatch": ["**/__tests__/**/*.test.js"],
+  "collectCoverageFrom": [
+    "src/js/**/*.js",
+    "!src/js/main.js",
+    "!src/js/solve.js",
+    "!src/js/code.js"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
+  },
+  "moduleNameMapper": {
+    "\\.(css|scss)$": "<rootDir>/src/__tests__/__mocks__/styleMock.js",
+    "^bundle-text:": "<rootDir>/src/__tests__/__mocks__/bundleTextMock.js"
+  },
+  "transform": {
+    "^.+\\.js$": "babel-jest"
+  },
+  "transformIgnorePatterns": [
+    "node_modules/(?!(chart\\.js|chartjs-plugin-dragdata|prismjs)/)"
+  ]
+}
