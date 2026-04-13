@@ -69,7 +69,7 @@ import {
   getCurrentHeights,
 } from '../js/chartSetup.js';
 import { updateResults } from '../js/resultsDisplay.js';
-import { calculateStatistics, updateStatisticsDisplay } from '../js/statistics.js';
+import { updateStatisticsDisplay } from '../js/statistics.js';
 
 describe('chartSetup module', () => {
   beforeEach(() => {
