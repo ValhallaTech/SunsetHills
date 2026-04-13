@@ -18,7 +18,7 @@ describe('PRESETS', () => {
   });
 
   test('each preset has required properties', () => {
-    for (const [key, preset] of Object.entries(PRESETS)) {
+    for (const preset of Object.values(PRESETS)) {
       expect(preset).toHaveProperty('name');
       expect(preset).toHaveProperty('description');
       expect(preset).toHaveProperty('heights');
