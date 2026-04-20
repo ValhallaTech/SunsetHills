@@ -13,7 +13,8 @@
   
   # Node.js version to use (exact version for consistency)
   [build.environment]
-    NODE_VERSION = "22.20.0"
+    NODE_VERSION = "24.15.0"
+    YARN_VERSION = "4.14.1"
 
 # NO REDIRECTS NEEDED - This is a Multi-Page App (MPA), not an SPA
 # Each HTML file should be served as-is
