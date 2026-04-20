@@ -1,0 +1,139 @@
+name: Sync Runtime Versions
+
+on:
+  schedule:
+    # Runs every Monday at 08:00 UTC
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-runtime-versions:
+    name: Sync Node and Yarn pins
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+
+      - name: Update pinned Node and Yarn versions
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const { execSync } = require('child_process');
+
+          const readJsonCommand = (command, errorContext) => {
+            try {
+              return JSON.parse(execSync(command, { encoding: 'utf8' }));
+            } catch (error) {
+              throw new Error(`${errorContext}: ${error.message}`);
+            }
+          };
+
+          const compareSemver = (a, b) => {
+            const aParts = a.split('.').map((part) => Number.parseInt(part, 10));
+            const bParts = b.split('.').map((part) => Number.parseInt(part, 10));
+            for (let i = 0; i < 3; i += 1) {
+              if ((aParts[i] || 0) > (bParts[i] || 0)) return 1;
+              if ((aParts[i] || 0) < (bParts[i] || 0)) return -1;
+            }
+            return 0;
+          };
+
+          const isStableSemver = (version) => /^\d+\.\d+\.\d+$/.test(version);
+
+          const latestForMajor = (versions, major) => {
+            const majorPrefix = `${major}.`;
+            return versions
+              .filter((version) => version.startsWith(majorPrefix) && isStableSemver(version))
+              .reduce(
+                (latest, version) => (!latest || compareSemver(version, latest) > 0 ? version : latest),
+                null,
+              );
+          };
+
+          const packageJsonPath = 'package.json';
+          const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+
+          const yarnMajorMatch = (packageJson.packageManager || '').match(/^yarn@(\d+)\./);
+          if (!yarnMajorMatch) {
+            throw new Error(`Could not parse Yarn major from packageManager: ${packageJson.packageManager}`);
+          }
+          const yarnMajor = Number.parseInt(yarnMajorMatch[1], 10);
+
+          const currentNodePin = fs.readFileSync('.nvmrc', 'utf8').trim();
+          const nodeMajorMatch = currentNodePin.match(/^(\d+)\./);
+          if (!nodeMajorMatch) {
+            throw new Error(`Could not parse Node major from .nvmrc: ${currentNodePin}`);
+          }
+          const nodeMajor = Number.parseInt(nodeMajorMatch[1], 10);
+
+          const yarnVersions = readJsonCommand(
+            'npm view @yarnpkg/cli-dist versions --json',
+            'Failed to fetch Yarn versions',
+          );
+          if (!Array.isArray(yarnVersions) || yarnVersions.length === 0) {
+            throw new Error('Yarn versions response was empty or invalid.');
+          }
+          const latestYarn = latestForMajor(yarnVersions, yarnMajor);
+
+          const nodeDistIndex = readJsonCommand(
+            'curl -fsSL https://nodejs.org/dist/index.json',
+            'Failed to fetch Node.js release index',
+          );
+          if (!Array.isArray(nodeDistIndex) || nodeDistIndex.length === 0) {
+            throw new Error('Node.js release index response was empty or invalid.');
+          }
+          const nodeVersions = nodeDistIndex.map((entry) => entry.version.replace(/^v/, ''));
+          const latestNode = latestForMajor(nodeVersions, nodeMajor);
+
+          if (!latestYarn || !latestNode) {
+            throw new Error(`Unable to determine latest Yarn ${yarnMajor} and Node ${nodeMajor} versions.`);
+          }
+
+          packageJson.packageManager = `yarn@${latestYarn}`;
+          fs.writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`);
+
+          fs.writeFileSync('.nvmrc', `${latestNode}\n`);
+
+          const netlifyPath = 'netlify.toml';
+          const netlifyToml = fs.readFileSync(netlifyPath, 'utf8');
+
+          const nodeVersionPattern = /NODE_VERSION\s*=\s*"[^"]+"/;
+          const yarnVersionPattern = /YARN_VERSION\s*=\s*"[^"]+"/;
+
+          if (!nodeVersionPattern.test(netlifyToml) || !yarnVersionPattern.test(netlifyToml)) {
+            throw new Error('Failed to update netlify.toml: expected NODE_VERSION and YARN_VERSION entries were not found.');
+          }
+
+          const updatedNetlifyToml = netlifyToml
+            .replace(nodeVersionPattern, `NODE_VERSION = "${latestNode}"`)
+            .replace(yarnVersionPattern, `YARN_VERSION = "${latestYarn}"`);
+
+          if (updatedNetlifyToml === netlifyToml) {
+            throw new Error('Failed to update netlify.toml: NODE_VERSION and YARN_VERSION replacements did not change the file.');
+          }
+
+          fs.writeFileSync(netlifyPath, updatedNetlifyToml);
+          NODE
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: chore/sync-runtime-versions
+          delete-branch: true
+          title: "chore: sync Node and Yarn version pins"
+          commit-message: "chore: sync Node and Yarn version pins"
+          body: |
+            Automated sync of pinned runtime/toolchain versions:
+            - package.json packageManager
+            - .nvmrc Node version
+            - netlify.toml NODE_VERSION and YARN_VERSION
+          labels: dependencies
