@@ -51,8 +51,8 @@ This project provides an interactive, visual solution where you can:
 ## Quick Start
 
 ### Prerequisites
-- Node.js 22.20.0 LTS (or compatible version)
-- Yarn 4.10.3
+- Node.js 24.15.0 (from `.nvmrc`)
+- Yarn 4.14.1 (from `packageManager` in `package.json`)
 
 ### Installation
 
@@ -111,20 +111,20 @@ netlify deploy --prod
 
 ### Frontend
 - **Bootstrap 5.3.8** - Responsive UI framework
-- **Chart.js 4.5.0** - Interactive data visualization
+- **Chart.js 4.5.1** - Interactive data visualization
 - **chartjs-plugin-dragdata 2.3.1** - Drag-and-drop functionality
 - **Prism.js 1.30.0** - Syntax highlighting (Monokai theme)
-- **Font Awesome 7.1.0** - Icon library
+- **Font Awesome 7.2.0** - Icon library
 
 ### Build Tools
-- **Yarn 4.10.3** - Package management
-- **Parcel 2.16.0** - Zero-config bundler
-- **ESLint 9.17** - Code linting
-- **Prettier 3.4** - Code formatting
+- **Yarn 4.14.1** - Package management
+- **Parcel 2.16.4** - Zero-config bundler
+- **ESLint 10.2.1** - Code linting
+- **Prettier 3.8.3** - Code formatting
 
 ### Deployment
 - **Netlify** - Hosting with CDN
-- **Node.js 22.20.0** - Build environment
+- **Node.js 22.22.2** - Netlify build environment (`netlify.toml`)
 
 ## Scripts
 
@@ -176,7 +176,7 @@ SunsetHills/
 ?       ??? csharp.txt          # C# example
 ??? dist/                       # Production build (generated)
 ??? netlify.toml                # Netlify configuration
-??? .nvmrc                      # Node version (22.20.0)
+??? .nvmrc                      # Node version (24.15.0)
 ??? package.json                # Dependencies and scripts
 ??? DEPLOYMENT.md               # Deployment guide
 ??? README.md
