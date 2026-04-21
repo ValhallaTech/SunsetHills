@@ -51,8 +51,8 @@ This project provides an interactive, visual solution where you can:
 ## Quick Start
 
 ### Prerequisites
-- Node.js 22.20.0 LTS (or compatible version)
-- Yarn 4.10.3
+- Node.js 24.15.0 (from `.nvmrc`)
+- Yarn 4.14.1 (from `packageManager` in `package.json`)
 
 ### Installation
 
@@ -124,7 +124,7 @@ netlify deploy --prod
 
 ### Deployment
 - **Netlify** - Hosting with CDN
-- **Node.js 22.20.0** - Build environment
+- **Node.js 22.22.2** - Netlify build environment (`netlify.toml`)
 
 ## Scripts
 
@@ -176,7 +176,7 @@ SunsetHills/
 ?       ??? csharp.txt          # C# example
 ??? dist/                       # Production build (generated)
 ??? netlify.toml                # Netlify configuration
-??? .nvmrc                      # Node version (22.20.0)
+??? .nvmrc                      # Node version (24.15.0)
 ??? package.json                # Dependencies and scripts
 ??? DEPLOYMENT.md               # Deployment guide
 ??? README.md
