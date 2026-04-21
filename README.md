@@ -124,7 +124,7 @@ netlify deploy --prod
 
 ### Deployment
 - **Netlify** - Hosting with CDN
-- **Node.js 22.22.2** - Netlify build environment (`netlify.toml`)
+- **Node.js 24.x** - Netlify build environment (`netlify.toml`)
 
 ## Scripts
 
