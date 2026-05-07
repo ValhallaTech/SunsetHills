@@ -23,10 +23,10 @@
     "@babel/core": "7.29.0",
     "@babel/preset-env": "7.29.5",
     "@parcel/transformer-inline-string": "2.16.4",
-    "babel-jest": "30.3.0",
+    "babel-jest": "30.4.0",
     "eslint": "10.3.0",
-    "jest": "30.3.0",
-    "jest-environment-jsdom": "30.3.0",
+    "jest": "30.4.0",
+    "jest-environment-jsdom": "30.4.0",
     "parcel": "2.16.4",
     "prettier": "3.8.3",
     "rimraf": "6.1.3"
