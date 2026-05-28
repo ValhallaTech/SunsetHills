@@ -51,8 +51,8 @@ This project provides an interactive, visual solution where you can:
 ## Quick Start
 
 ### Prerequisites
-- Node.js 24.15.0 (from `.nvmrc`)
-- Yarn 4.14.1 (from `packageManager` in `package.json`)
+- Node.js 24.x (from `.nvmrc`)
+- Yarn 4.x (from `packageManager` in `package.json`)
 
 ### Installation
 
