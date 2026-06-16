@@ -20,8 +20,8 @@
     "prismjs": "1.30.0"
   },
   "devDependencies": {
-    "@babel/core": "7.29.7",
-    "@babel/preset-env": "7.29.7",
+    "@babel/core": "8.0.0",
+    "@babel/preset-env": "8.0.0",
     "@parcel/transformer-inline-string": "2.16.4",
     "babel-jest": "30.4.1",
     "eslint": "10.5.0",
