@@ -20,11 +20,11 @@
     "prismjs": "1.30.0"
   },
   "devDependencies": {
-    "@babel/core": "8.0.1",
-    "@babel/preset-env": "8.0.2",
+    "@babel/core": "8.0.5",
+    "@babel/preset-env": "8.0.5",
     "@parcel/transformer-inline-string": "2.16.4",
     "babel-jest": "30.5.1",
-    "eslint": "10.9.1",
+    "eslint": "10.10.0",
     "jest": "30.5.1",
     "jest-environment-jsdom": "30.5.1",
     "parcel": "2.16.4",
