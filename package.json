@@ -20,13 +20,13 @@
     "prismjs": "1.30.0"
   },
   "devDependencies": {
-    "@babel/core": "8.0.5",
-    "@babel/preset-env": "8.0.5",
+    "@babel/core": "8.0.6",
+    "@babel/preset-env": "8.0.6",
     "@parcel/transformer-inline-string": "2.16.4",
-    "babel-jest": "30.5.1",
-    "eslint": "10.10.0",
-    "jest": "30.5.1",
-    "jest-environment-jsdom": "30.5.1",
+    "babel-jest": "30.5.2",
+    "eslint": "10.11.0",
+    "jest": "30.5.2",
+    "jest-environment-jsdom": "30.5.2",
     "parcel": "2.16.4",
     "prettier": "3.9.8",
     "rimraf": "6.1.3"
